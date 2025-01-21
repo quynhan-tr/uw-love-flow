@@ -3,9 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Join</title> <link rel="stylesheet" href="style.css">
+  <title>Join</title>
+  <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
 </head>
-<body>
-  <img src="Logo.png" alt="Logo" class="logo" onclick="window.location.href='main.html'"></body>
+<body class="main">
+    <img src="Logo.png" alt="Logo" class="join-logo" onclick="window.location.href='main.html'">
+    <div class="box" style="flex-direction: column; height: auto; padding: 20px; gap: 10px;">
+        <p style="color: #7E3064; margin: 0; font-family: 'Rubik', sans-serif; font-size: 21px; width: 80%; text-align: left; margin-left: -20px;">Your Name</p>
+        <input type="text" style="width: 80%; padding: 10px; border-radius: 5px; border: 2px solid #7E3064; font-family: 'Rubik', sans-serif; font-size: 20px; background-color: #FFCFEF; color: #7E3064;">
+        <p style="color: #7E3064; margin: 0; font-family: 'Rubik', sans-serif; font-size: 21px; width: 80%; text-align: left; margin-left: -20px;">Discord Handle</p>
+        <input type="text" style="width: 80%; padding: 10px; border-radius: 5px; border: 2px solid #7E3064; font-family: 'Rubik', sans-serif; font-size: 20px; background-color: #FFCFEF; color: #7E3064;">
+        <button class="button" style="margin-top: 10px; font-family: 'Rubik', sans-serif; font-size: 22px;" onclick="window.location.href='preferences.html'">Submit</button>
+    </div>
+</body>
 </html>
