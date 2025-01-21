@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Friendship Quiz</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+  <style>
+    .quiz-box {
+      width: 80%;
+      max-width: 700px;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 10px;
+      border: 3px solid #7E3064;
+      font-family: 'Rubik', sans-serif;
+      font-size: 22px;
+      color: #7E3064;
+      background-color: #FFCFEF;
+      overflow-y: auto;
+      height: 100%;
+    }
+    .quiz-box p {
+      margin-bottom: 10px;
+    }
+    .quiz-box div {
+      margin-bottom: 20px;
+    }
+    .quiz-box label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .quiz-box input[type="text"] {
+      width: 100%;
+      padding: 5px;
+      margin-top: 5px;
+      border: 1px solid #7E3064;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body class="quiz">
+    <img src="Logo.png" alt="Logo" class="quiz-logo" onclick="window.location.href='main.html'">
+    <div class="quiz-box">
+      <form id="friendship-quiz-form">
+        <!-- Question 1 -->
+        <div>
+          <p>1. Your MBTI?</p>
+          <input type="text" name="mbti" maxlength="4" required>
+        </div>
+
+        <!-- Question 2 -->
+        <div>
+          <p>2. Are you a conversationalist or listener?</p>
+          <label><input type="radio" name="communication-style" value="Conversationalist"> Conversationalist</label>
+          <label><input type="radio" name="communication-style" value="Listener"> Listener</label>
+        </div>
+
+        <!-- Question 3 -->
+        <div>
+          <p>3. What type of activities do you enjoy most on a free weekend?</p>
+          <label><input type="radio" name="weekend-activity" value="Active"> Active (sports, hiking, camping, etc.)</label>
+          <label><input type="radio" name="weekend-activity" value="Chill"> Chill (movie, study, painting, etc.)</label>
+          <label><input type="radio" name="weekend-activity" value="Spontaneous"> Anything spontaneous and fun</label>
+          <label><input type="radio" name="weekend-activity" value="Friends"> Hanging out with friends</label>
+        </div>
+
+        <!-- Question 4 -->
+        <div>
+          <p>4. Would you rather have more money or more freedom?</p>
+          <label><input type="radio" name="preference" value="Money"> Money</label>
+          <label><input type="radio" name="preference" value="Freedom"> Freedom</label>
+        </div>
+
+        <!-- Question 5 -->
+        <div>
+          <p>5. Select your top 3 movie genres</p>
+          <label><input type="checkbox" name="movie-genres" value="Action/Adventure"> Action/Adventure</label>
+          <label><input type="checkbox" name="movie-genres" value="Drama"> Drama</label>
+          <label><input type="checkbox" name="movie-genres" value="Comedy"> Comedy</label>
+          <label><input type="checkbox" name="movie-genres" value="Sci Fi/Fantasy"> Sci Fi/Fantasy</label>
+          <label><input type="checkbox" name="movie-genres" value="Horror/Thriller"> Horror/Thriller</label>
+          <label><input type="checkbox" name="movie-genres" value="Anime"> Anime</label>
+        </div>
+
+        <!-- Question 6 -->
+        <div>
+          <p>6. How often do you party?</p>
+          <label><input type="radio" name="party-frequency" value="Usually"> Usually</label>
+          <label><input type="radio" name="party-frequency" value="Sometimes"> Sometimes</label>
+          <label><input type="radio" name="party-frequency" value="Rarely"> Rarely</label>
+          <label><input type="radio" name="party-frequency" value="Never"> Never</label>
+        </div>
+
+        <!-- Question 7 -->
+        <div>
+          <p>7. Do you believe in unicorn? (something funny)</p>
+          <label><input type="radio" name="unicorn" value="Yes"> Yes</label>
+          <label><input type="radio" name="unicorn" value="No"> No</label>
+          <label><input type="radio" name="unicorn" value="Nonsense"> Nonsense</label>
+        </div>
+
+        <!-- Submit Button -->
+        <div style="text-align: center; margin-top: 20px;">
+          <button type="submit" class="button" onclick="window.location.href='waiting.html'">Submit</button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      document.getElementById('friendship-quiz-form').addEventListener('submit', function(event) {
+        const genres = document.querySelectorAll('input[type="checkbox"][name="movie-genres"]:checked');
+        
+        if (genres.length !== 3) {
+          alert('Please select exactly three movie genres.');
+          event.preventDefault();
+        }
+      });
+    </script>
+</body>
+</html>
