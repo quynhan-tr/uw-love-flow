@@ -50,39 +50,60 @@
 <body class="quiz">
     <img src="Logo.png" alt="Logo" class="quiz-logo" onclick="window.location.href='main.html'">
     <div class="quiz-box">
-      <form id="friendship-quiz-form">
+      <form id="friendship-quiz-form" method="POST" action="/friendship-quiz.html" onsubmit="event.preventDefault();">
         <!-- Question 1 -->
         <div>
           <p>1. Your MBTI?</p>
           <input type="text" name="mbti" maxlength="4" required>
         </div>
-
         <!-- Question 2 -->
         <div>
-          <p>2. Are you a conversationalist or listener?</p>
+          <p>2. What gender would you prefer to be matched with?</p>
+          <label><input type="radio" name="preferred-gender" value="Male" onclick="hideOtherInput()"> Male</label>
+          <label><input type="radio" name="preferred-gender" value="Female" onclick="hideOtherInput()"> Female</label>
+          <label>
+            <input type="radio" name="preferred-gender" value="Other" onclick="showOtherInput()"> Other
+            <input type="text" id="other-gender" name="other-gender-input" style="display: none; width: 200px; margin-left: 10px;">
+          </label>
+        </div>
+
+        <script>
+          function showOtherInput() {
+            document.getElementById('other-gender').style.display = 'inline-block';
+          }
+          
+          function hideOtherInput() {
+            document.getElementById('other-gender').style.display = 'none';
+            document.getElementById('other-gender').value = '';
+          }
+        </script>
+
+        <!-- Question 3 -->
+        <div>
+          <p>3. Are you a conversationalist or listener?</p>
           <label><input type="radio" name="communication-style" value="Conversationalist"> Conversationalist</label>
           <label><input type="radio" name="communication-style" value="Listener"> Listener</label>
         </div>
 
-        <!-- Question 3 -->
+        <!-- Question 4 -->
         <div>
-          <p>3. What type of activities do you enjoy most on a free weekend?</p>
+          <p>4. What type of activities do you enjoy most on a free weekend?</p>
           <label><input type="radio" name="weekend-activity" value="Active"> Active <span style="font-size: 16px; color: #b9649d;">(sports, hiking, camping, etc.)</span></label>
           <label><input type="radio" name="weekend-activity" value="Chill"> Chill <span style="font-size: 16px; color: #b9649d;">(movie, study, painting, etc.)</span></label>
           <label><input type="radio" name="weekend-activity" value="Spontaneous"> Anything spontaneous and fun</label>
           <label><input type="radio" name="weekend-activity" value="Friends"> Hanging out with friends</label>
         </div>
 
-        <!-- Question 4 -->
+        <!-- Question 5 -->
         <div>
-          <p>4. Would you rather have more money or more freedom?</p>
+          <p>5. Would you rather have more money or more freedom?</p>
           <label><input type="radio" name="preference" value="Money"> Money</label>
           <label><input type="radio" name="preference" value="Freedom"> Freedom</label>
         </div>
 
-        <!-- Question 5 -->
+        <!-- Question 6 -->
         <div>
-          <p>5. Select your top 3 movie genres</p>
+          <p>6. Select your top 3 movie genres</p>
           <label><input type="checkbox" name="movie-genres" value="Action/Adventure"> Action/Adventure</label>
           <label><input type="checkbox" name="movie-genres" value="Drama"> Drama</label>
           <label><input type="checkbox" name="movie-genres" value="Comedy"> Comedy</label>
@@ -91,18 +112,18 @@
           <label><input type="checkbox" name="movie-genres" value="Anime"> Anime</label>
         </div>
 
-        <!-- Question 6 -->
+        <!-- Question 7 -->
         <div>
-          <p>6. How often do you party?</p>
+          <p>7. How often do you party?</p>
           <label><input type="radio" name="party-frequency" value="Usually"> Usually</label>
           <label><input type="radio" name="party-frequency" value="Sometimes"> Sometimes</label>
           <label><input type="radio" name="party-frequency" value="Rarely"> Rarely</label>
           <label><input type="radio" name="party-frequency" value="Never"> Never</label>
         </div>
 
-        <!-- Question 7 -->
+        <!-- Question 8 -->
         <div>
-          <p>7. What are the top 3 components to a good relationship?</p>
+          <p>8. What are the top 3 components to a good relationship?</p>
           <label><input type="checkbox" name="relationship-components" value="Trust"> Trust <span style="font-size: 16px; color: #b9649d;">(Placing trust in your partner and giving them the benefit of the doubt)</span></label>
           <label><input type="checkbox" name="relationship-components" value="Communication"> Communication <span style="font-size: 16px; color: #b9649d;">(Being able to share your perspective and have it value)</span></label>
           <label><input type="checkbox" name="relationship-components" value="Respect"> Respect <span style="font-size: 16px; color: #b9649d;">(Valuing your partner and understanding their boundaries)</span></label>
@@ -113,9 +134,9 @@
           <label><input type="checkbox" name="relationship-components" value="Independence"> Independence <span style="font-size: 16px; color: #b9649d;">(Having your own identity and space)</span></label>
         </div>
 
-        <!-- Question 8 -->
+        <!-- Question 9 -->
         <div>
-          <p>8. Do you believe in unicorn? (something funny)</p>
+          <p>9. Do you believe in unicorn? (something funny)</p>
           <label><input type="radio" name="unicorn" value="Yes"> Yes</label>
           <label><input type="radio" name="unicorn" value="No"> No</label>
           <label><input type="radio" name="unicorn" value="Nonsense"> Nonsense</label>
@@ -123,8 +144,7 @@
 
         <!-- Submit Button -->
         <div style="text-align: center; margin-top: 20px;">
-          <!--doesn't work - delete all response-->
-          <button type="submit" class="button" onclick="window.location.href='waiting.html'">Submit</button>
+          <button type="submit" class="button">Submit</button>
         </div>
       </form>
     </div>
@@ -136,6 +156,9 @@
         if (genres.length !== 3) {
           alert('Please select exactly three movie genres.');
           event.preventDefault();
+        }
+        else {
+          window.location.href = 'waiting.html';
         }
       });
     </script>
