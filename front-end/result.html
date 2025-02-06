@@ -8,11 +8,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
 </head>
 <body class="main">
-    <img src="Logo.png" alt="Logo" class="join-logo" onclick="window.location.href='main.html'">
+    <img src="Logo.png" alt="Logo" class="join-logo" onclick="window.location.href='main.html'" style="margin-top: 150px;">
     <style>
       .floating-name {
         position: fixed;
-        color: #FF9EDB;
+        color: #e699c9;
         font-family: 'Rubik', sans-serif;
         font-size: 32px;
         font-weight: bold;
@@ -27,28 +27,11 @@
         75% { transform: translate(-100px, 100px); }
         100% { transform: translate(0, 0); }
       }
-      .name-circle {
-        position: absolute;
-        width: 400px;
-        height: 400px;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
-      .name-circle span {
-        position: absolute;
-        width: 100px;
-        text-align: center;
-        transform-origin: center;
-        color: #FF9EDB;
-        font-family: 'Rubik', sans-serif;
-        font-size: 32px;
-        font-weight: bold;
-      }
+
     </style>
 
     <div style="position: relative; height: 80vh;">
-      <div style="position: absolute; top: calc(50% - 50px); left: 50%; transform: translate(-50%, -50%); text-align: center; 
+      <div style="position: absolute; top: calc(50% - 150px); left: 50%; transform: translate(-50%, -50%); text-align: center; 
                   background: #FFCFEF; padding: 10px; border-radius: 10px; border: 2px solid #7E3064; width: 500px;">
         <h2 style="color: #7E3064; font-family: 'Rubik', sans-serif; margin: 5px;">Enter your name to see your match</h2>
         <form id="matchForm" onsubmit="showMatch(event)">
