@@ -1,6 +1,6 @@
 import json
 from itertools import combinations
-from app import db, User, MatchResult
+from models import db, User, MatchResult
 
 def calculate_mbti_compatibility(mbti1, mbti2):
     # Convert MBTIs to uppercase and validate format
