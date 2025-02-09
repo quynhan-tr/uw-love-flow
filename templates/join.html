@@ -1,0 +1,44 @@
+<DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join</title>
+  <link rel="stylesheet" href="../static/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+</head>
+<body class="main">
+    <form id="joinForm" action="/join" method="POST">
+        <img src="../static/Logo.png" alt="Logo" class="join-logo" onclick="window.location.href='main.html'">
+        <div class="box">
+            <p class="input-label">Your Name</p>
+            <input id="nameInput" name="name" required type="text" class="input-field">
+            <p class="input-label">Discord Handle</p>
+            <input id="discordInput" name="discord" required type="text" class="input-field">
+            <p id="warningText" class="warning-text">Please fill in all required fields</p>
+            <button class="button" type="submit">Next</button>
+        </div>
+    </form>
+    
+    <script>
+        function validateAndSubmit(event) {
+            event.preventDefault(); // Prevent the default form submission
+    
+            const nameInput = document.getElementById('nameInput');
+            const discordInput = document.getElementById('discordInput');
+            const warningText = document.getElementById('warningText');
+    
+            if (nameInput.value.trim() === '' || discordInput.value.trim() === '') {
+                warningText.style.display = 'block';
+            } else {
+                document.getElementById('joinForm').submit(); // Submit the form
+            }
+        }
+    
+            document.getElementById('joinForm').addEventListener('submit', validateAndSubmit);
+        </script>
+</body>
+</html>
+
+
+

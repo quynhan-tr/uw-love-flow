@@ -1,18 +1,13 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, session
 import json
 import os
-import random
-import string
 
 app = Flask(__name__)
+app.secret_key = 'your_secret_key_here'  # Required for session management
 
 # Get the absolute path to the project directory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DATA_DIR = os.path.join(BASE_DIR, 'data')
-
-# Ensure the data directory exists
-if not os.path.exists(DATA_DIR):
-    os.makedirs(DATA_DIR)
+DATA_FILE = os.path.join(BASE_DIR, 'data.txt')
 
 @app.route('/')
 def home():
@@ -21,16 +16,16 @@ def home():
 @app.route('/join', methods=['GET', 'POST'])
 def join():
     if request.method == 'POST':
-        name = request.form.get('name')
-        discord = request.form.get('discord')
-        return redirect(url_for('friendship_quiz', name=name, discord=discord))
+        session['name'] = request.form.get('name')
+        session['discord'] = request.form.get('discord')
+        return redirect(url_for('friendship_quiz'))
     return render_template('join.html')
 
 @app.route('/friendship-quiz', methods=['GET', 'POST'])
 def friendship_quiz():
     if request.method == 'POST':
-        name = request.args.get('name')
-        discord = request.args.get('discord')
+        name = session.get('name')
+        discord = session.get('discord')
         
         user_data = {
             'name': name,
@@ -47,22 +42,26 @@ def friendship_quiz():
             'unicorn_belief': request.form.get('unicorn')
         }
 
-        # Generate a random Discord name
-        random_discord_name = ''.join(random.choices(string.ascii_letters + string.digits, k=8))
+        print("User Data:", user_data)  # Debugging line
 
-        # Save the user data
-        filename = os.path.join(DATA_DIR, f"{name}_{discord}.json")
-        with open(filename, 'w') as f:
-            json.dump(user_data, f, indent=4)
+        # Append user data to data.txt
+        try:
+            with open(DATA_FILE, 'a') as f:
+                f.write(json.dumps(user_data) + '\n')
+                print("Data written to file")  # Debugging line
+        except Exception as e:
+            print("Error writing to file:", e)  # Debugging line
 
-        # Pass the random Discord name to the result route
-        return redirect(url_for('result', random_discord=random_discord_name))
+        return redirect(url_for('waiting'))
     return render_template('friendship-quiz.html')
+
+@app.route('/waiting')
+def waiting():
+    return render_template('waiting.html')
 
 @app.route('/result')
 def result():
-    random_discord = request.args.get('random_discord')
-    return render_template('result.html', random_discord=random_discord)
+    return render_template('result.html')
 
 if __name__ == '__main__':
-    app.run(debug=True) 
+    app.run(debug=True)
