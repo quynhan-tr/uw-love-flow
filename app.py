@@ -36,27 +36,35 @@ def main():
 @app.route('/friendship-quiz', methods=['GET', 'POST'])
 def friendship_quiz():
     if request.method == 'POST':
-        
-        user_data = {
-            'name': request.form.get('name'),
-            'discord_handle': request.form.get('discord'),
-            'mbti': request.form.get('mbti'),
-            'gender': request.form.get('gender'),
-            'preferred_gender': request.form.getlist('preferred-gender'),
-            'communication_style': request.form.get('communication-style'),
-            'weekend_activity': request.form.get('weekend-activity'),
-            'preference': request.form.get('preference'),
-            'movie_genres': request.form.getlist('movie-genres'),
-            'party_frequency': request.form.get('party-frequency'),
-            'relationship_components': request.form.getlist('relationship-components'),
-            'fate_belief': request.form.get('fate')
-        }
+        name = request.form.get('name')
+        discord_handle = request.form.get('discord')
+        mbti = request.form.get('mbti')
+        # Add other fields as necessary
+
+        if not name or not discord_handle or not mbti:
+            return "All fields are required", 400
 
         try:
-            with open(DATA_FILE, 'a') as f:
-                f.write(json.dumps(user_data) + '\n')
+            # Create a new User object
+            user = User(
+                name=name,
+                discord_handle=discord_handle,
+                mbti=mbti,
+                gender=request.form.get('gender'),
+                preferred_gender=','.join(request.form.getlist('preferred-gender')),
+                communication_style=request.form.get('communication-style'),
+                weekend_activity=request.form.get('weekend-activity'),
+                preference=request.form.get('preference'),
+                movie_genres=','.join(request.form.getlist('movie-genres')),
+                party_frequency=request.form.get('party-frequency'),
+                relationship_components=','.join(request.form.getlist('relationship-components')),
+                fate_belief=request.form.get('fate')
+            )
+            # Add the user to the database session
+            db.session.add(user)
+            db.session.commit()
         except Exception as e:
-            logging.error("Error writing to file: %s", e)
+            logging.error("Error adding user to database: %s", e)
             return "An error occurred", 500
 
         return redirect(url_for('waiting'))
@@ -64,6 +72,10 @@ def friendship_quiz():
 
 @app.route('/waiting')
 def waiting():
+    # Check if matches exist in the database
+    matches_exist = MatchResult.query.first() is not None
+    if matches_exist:
+        return redirect(url_for('pre_result'))
     return render_template('waiting.html')
 
 def pre_result():
@@ -73,13 +85,9 @@ def pre_result():
 
 @app.route('/check_result')
 def check_result():
-    result_file = 'result.txt'
-    
-    # Check if the file exists and has content
-    if os.path.exists(result_file) and os.path.getsize(result_file) > 0:
-        return jsonify(hasResult=True)
-    else:
-        return jsonify(hasResult=False)
+    # Check if matches exist in the database
+    matches_exist = MatchResult.query.first() is not None
+    return jsonify(hasResult=matches_exist)
 
 @app.route('/host')
 def host():
