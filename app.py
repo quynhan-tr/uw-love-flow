@@ -35,7 +35,8 @@ def friendship_quiz():
             'name': name,
             'discord_handle': discord,
             'mbti': request.form.get('mbti'),
-            'preferred_gender': request.form.get('preferred-gender'),
+            'gender': request.form.get('gender'),
+            'preferred_gender': request.form.getlist('preferred-gender'),
             'other_gender': request.form.get('other-gender-input'),
             'communication_style': request.form.get('communication-style'),
             'weekend_activity': request.form.get('weekend-activity'),
@@ -43,7 +44,7 @@ def friendship_quiz():
             'movie_genres': request.form.getlist('movie-genres'),
             'party_frequency': request.form.get('party-frequency'),
             'relationship_components': request.form.getlist('relationship-components'),
-            'unicorn_belief': request.form.get('unicorn')
+            'fate_belief': request.form.get('fate')
         }
 
         print("User Data:", user_data)  # Debugging line

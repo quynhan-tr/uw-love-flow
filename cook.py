@@ -38,7 +38,7 @@ def calculate_compatibility(user1, user2):
     score += calculate_mbti_compatibility(user1['mbti'], user2['mbti'])
 
     # Question 2 & 3: Gender Preference
-    if user1['gender'] != user2['preferred_gender'] or user2['gender'] != user1['preferred_gender']:
+    if user1['gender'] not in user2['preferred_gender'] or user2['gender'] not in user1['preferred_gender']:
         return 0
 
     # Question 4: Conversationalist or Listener
@@ -219,14 +219,13 @@ def find_best_matches(all_compatibilities):
 
 def write_matches_to_file(matches):
     with open('result.txt', 'w') as f:
-        f.write("Match Results:\n\n")
         for user1, user2, score, round_type in matches:
-            f.write(f"{round_type} Match:\n")
-            f.write(f"{user1} matched with {user2}\n")
-            f.write(f"Compatibility Score: {score:.2f}\n")
-            if round_type == "Round 2":
-                f.write("Note: This match was made without considering gender/communication preferences\n")
-            f.write("\n")
+            with open('data.txt', 'r') as data_file:
+                discord_handles = {}
+                for line in data_file:
+                    user_data = json.loads(line)
+                    discord_handles[user_data['name']] = user_data['discord_handle']
+            f.write(f"{round_type} - {user1} ({discord_handles[user1]}) - {user2} ({discord_handles[user2]}) - {score:.2f}\n")
 
 def main():
     # Calculate compatibilities for all users
