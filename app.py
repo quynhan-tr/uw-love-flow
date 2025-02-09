@@ -3,6 +3,7 @@ import json
 import os
 from models import db, User, MatchResult  # Import from models.py
 from cook import main as run_cook_logic  # Import the main function from cook.py
+import logging
 
 app = Flask(__name__)
 app.secret_key = 'uw_dsc_speed_dating' 
@@ -16,6 +17,13 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:/
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
+logging.basicConfig(level=logging.DEBUG)
+
+@app.before_request
+def create_tables():
+    with app.app_context():
+        db.create_all()
+
 @app.route('/')
 def home():
     return render_template('main.html')
@@ -24,41 +32,17 @@ def home():
 def main():
     return render_template('main.html')
 
-@app.route('/join', methods=['GET', 'POST'])
-def join():
-    if request.method == 'POST':
-        user = User(
-            name=request.form.get('name'),
-            discord_handle=request.form.get('discord'),
-            mbti=request.form.get('mbti'),
-            gender=request.form.get('gender'),
-            preferred_gender=request.form.get('preferred_gender'),
-            communication_style=request.form.get('communication_style'),
-            weekend_activity=request.form.get('weekend_activity'),
-            preference=request.form.get('preference'),
-            movie_genres=','.join(request.form.getlist('movie_genres')),
-            party_frequency=request.form.get('party_frequency'),
-            relationship_components=','.join(request.form.getlist('relationship_components')),
-            fate_belief=request.form.get('fate_belief')
-        )
-        db.session.add(user)
-        db.session.commit()
-        return redirect(url_for('waiting'))
-    return render_template('join.html')
 
 @app.route('/friendship-quiz', methods=['GET', 'POST'])
 def friendship_quiz():
     if request.method == 'POST':
-        name = session.get('name')
-        discord = session.get('discord')
         
         user_data = {
-            'name': name,
-            'discord_handle': discord,
+            'name': request.form.get('name'),
+            'discord_handle': request.form.get('discord'),
             'mbti': request.form.get('mbti'),
             'gender': request.form.get('gender'),
             'preferred_gender': request.form.getlist('preferred-gender'),
-            'other_gender': request.form.get('other-gender-input'),
             'communication_style': request.form.get('communication-style'),
             'weekend_activity': request.form.get('weekend-activity'),
             'preference': request.form.get('preference'),
@@ -68,15 +52,12 @@ def friendship_quiz():
             'fate_belief': request.form.get('fate')
         }
 
-        print("User Data:", user_data)  # Debugging line
-
-        # Append user data to data.txt
         try:
             with open(DATA_FILE, 'a') as f:
                 f.write(json.dumps(user_data) + '\n')
-                print("Data written to file")  # Debugging line
         except Exception as e:
-            print("Error writing to file:", e)  # Debugging line
+            logging.error("Error writing to file: %s", e)
+            return "An error occurred", 500
 
         return redirect(url_for('waiting'))
     return render_template('friendship-quiz.html')
@@ -140,6 +121,4 @@ def run_cook():
     return "cook.py logic executed!"
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
     app.run(debug=True)

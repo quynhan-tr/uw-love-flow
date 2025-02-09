@@ -12,6 +12,15 @@
     <img src="../static/Logo.png" alt="Logo" class="quiz-logo" onclick="window.location.href='/main'">
     <div class="quiz-box">
       <form id="friendship-quiz-form" method="POST" action="/friendship-quiz">
+        <!-- Name and Discord Handle -->
+        <div>
+          <p>Your Name</p>
+          <input type="text" name="name" required>
+        </div>
+        <div>
+          <p>Discord Handle</p>
+          <input type="text" name="discord" required>
+        </div>
         <!-- Question 1 -->
         <div>
           <p>1. Your MBTI?</p>

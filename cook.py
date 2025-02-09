@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, redirect, url_for, jsonify, s
 import json
 import os
 from models import db, User, MatchResult 
+import logging
 
 app = Flask(__name__)
 
@@ -231,6 +232,32 @@ def main():
         match_result = MatchResult(user1_id=user1_id, user2_id=user2_id, score=score, round_type=round_type)
         db.session.add(match_result)
     db.session.commit()
+
+@app.route('/join', methods=['GET', 'POST'])
+def join():
+    if request.method == 'POST':
+        try:
+            user = User(
+                name=request.form.get('name'),
+                discord_handle=request.form.get('discord'),
+                mbti=request.form.get('mbti'),
+                gender=request.form.get('gender'),
+                preferred_gender=request.form.get('preferred_gender'),
+                communication_style=request.form.get('communication_style'),
+                weekend_activity=request.form.get('weekend_activity'),
+                preference=request.form.get('preference'),
+                movie_genres=','.join(request.form.getlist('movie_genres')),
+                party_frequency=request.form.get('party_frequency'),
+                relationship_components=','.join(request.form.getlist('relationship_components')),
+                fate_belief=request.form.get('fate_belief')
+            )
+            db.session.add(user)
+            db.session.commit()
+            return redirect(url_for('waiting'))
+        except Exception as e:
+            logging.error("Error adding user: %s", e)
+            return "An error occurred", 500
+    return render_template('join.html')
 
 if __name__ == "__main__":
     with app.app_context():
