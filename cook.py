@@ -1,5 +1,6 @@
 import json
 from itertools import combinations
+from app import db, User, MatchResult
 
 def calculate_mbti_compatibility(mbti1, mbti2):
     # Convert MBTIs to uppercase and validate format
@@ -116,28 +117,16 @@ def calculate_compatibility(user1, user2):
     return score
 
 def calculate_all_compatibilities():
-    users = []
-    # Read all users from data.txt
-    with open('data.txt', 'r') as f:
-        for line in f:
-            users.append(json.loads(line))
-
-    # Dictionary to store compatibility scores for each user
+    users = User.query.all()
     all_compatibilities = {}
 
-    # For each user, calculate compatibility with all other users
     for user1 in users:
         user_scores = {}
         for user2 in users:
-            # Skip comparing user with themselves
-            if user1['discord_handle'] != user2['discord_handle']:
-                # Calculate score
+            if user1.id != user2.id:
                 score = calculate_compatibility(user1, user2)
-                # Store compatibility score
-                user_scores[user2['name']] = score
-        
-        # Store all compatibility scores for this user
-        all_compatibilities[user1['name']] = user_scores
+                user_scores[user2.id] = score
+        all_compatibilities[user1.id] = user_scores
 
     return all_compatibilities
 
@@ -237,14 +226,13 @@ def write_matches_to_file(matches):
                 f.write(f"{round_type} - {user1} ({discord_handles[user1]}) - {user2} ({discord_handles[user2]}) - {score:.2f}\n")
 
 def main():
-    # Calculate compatibilities for all users
     compatibilities = calculate_all_compatibilities()
-    
-    # Find matches using compatibilities
     matches = find_best_matches(compatibilities)
-    
-    # Write matches to result file
-    write_matches_to_file(matches)
+
+    for user1_id, user2_id, score, round_type in matches:
+        match_result = MatchResult(user1_id=user1_id, user2_id=user2_id, score=score, round_type=round_type)
+        db.session.add(match_result)
+    db.session.commit()
 
 if __name__ == "__main__":
     main()
