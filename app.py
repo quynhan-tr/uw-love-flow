@@ -9,7 +9,7 @@ app.secret_key = 'your_secret_key_here'  # Required for session management
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(BASE_DIR, 'data.txt')
 
-@app.route('/')
+@app.route('/main')
 def home():
     return render_template('main.html')
 
@@ -61,7 +61,15 @@ def waiting():
 
 @app.route('/result')
 def result():
-    return render_template('result.html')
+    # Read names from data.txt
+    names = []
+    with open('data.txt', 'r') as f:
+        for line in f:
+            user_data = json.loads(line)
+            names.append(user_data['name'])
+    
+    return render_template('result.html', names=names)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
