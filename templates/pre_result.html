@@ -16,10 +16,14 @@
       {% if error %}
       <p style="color: rgb(221, 29, 29);">{{ error }}</p>
       {% endif %}
+      {% if not matches_exist %}
+      <p style="color: #7E3064; font-family: 'Rubik', sans-serif;">Matches have not been calculated yet. Please check back later.</p>
+      {% else %}
       <form action="/result" method="GET">
         <input type="text" name="name" style="width: 80%; padding: 10px; margin: 10px 20px 20px 20px; border-radius: 5px; border: 2px solid #7E3064; font-family: 'Rubik', sans-serif; font-size: 18px;">
         <button type="submit" class="button">Find Match</button>
       </form>
+      {% endif %}
     </div>
   </div>
 </body>
