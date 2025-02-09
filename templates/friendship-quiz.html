@@ -17,6 +17,17 @@
           <p>1. Your MBTI?</p>
           <input type="text" name="mbti" maxlength="4" required>
         </div>
+        <!-- Question 1.5 -->
+        <div>
+          <p>1.5. Your gender:</p>
+          <label><input type="radio" name="gender" value="Male" onclick="hideOtherInput()"> Male</label>
+          <label><input type="radio" name="gender" value="Female" onclick="hideOtherInput()"> Female</label>
+          <label>
+            <input type="radio" name="gender" value="Other" onclick="showOtherInput()"> Other
+            <input type="text" id="other-gender-self" name="other-gender-self-input" style="display: none; width: 200px; margin-left: 10px;">
+          </label>
+        </div>
+
         <!-- Question 2 -->
         <div>
           <p>2. What gender would you prefer to be matched with?</p>
@@ -50,7 +61,7 @@
         <div>
           <p>4. What type of activities do you enjoy most on a free weekend?</p>
           <label><input type="radio" name="weekend-activity" value="Active"> Active <span style="font-size: 16px; color: #b9649d;">(sports, hiking, camping, etc.)</span></label>
-          <label><input type="radio" name="weekend-activity" value="Chill"> Chill <span style="font-size: 16px; color: #b9649d;">(movie, study, painting, etc.)</span></label>
+          <label><input type="radio" name="weekend-activity" value="Chill"> Chill <span style="font-size: 16px; color: #b9649d;">(catch up on sleep, movie, study, painting, etc.)</span></label>
           <label><input type="radio" name="weekend-activity" value="Spontaneous"> Anything spontaneous and fun</label>
           <label><input type="radio" name="weekend-activity" value="Friends"> Hanging out with friends</label>
         </div>
@@ -97,7 +108,7 @@
 
         <!-- Question 9 -->
         <div>
-          <p>9. Do you believe in unicorn? (something funny)</p>
+          <p>9. Do you believe in fate - something that is meant to be?</p>
           <label><input type="radio" name="unicorn" value="Yes"> Yes</label>
           <label><input type="radio" name="unicorn" value="No"> No</label>
           <label><input type="radio" name="unicorn" value="Nonsense"> Nonsense</label>
