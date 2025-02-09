@@ -3,14 +3,18 @@ import json
 import os
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key_here'  # Required for session management
+app.secret_key = 'uw_dsc_speed_dating' 
 
 # Get the absolute path to the project directory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(BASE_DIR, 'data.txt')
 
-@app.route('/main')
+@app.route('/')
 def home():
+    return render_template('main.html')
+
+@app.route('/main')
+def main():
     return render_template('main.html')
 
 @app.route('/join', methods=['GET', 'POST'])
@@ -58,6 +62,10 @@ def friendship_quiz():
 @app.route('/waiting')
 def waiting():
     return render_template('waiting.html')
+
+@app.route('/pre_result')
+def pre_result():
+    return render_template('pre_result.html')
 
 @app.route('/result')
 def result():

@@ -50,7 +50,7 @@
 
     <script>
       // Add floating names animation with varied starting positions and directions
-      const names = {{ names|tojson }};
+      const names = JSON.parse('{{ names|tojson|safe }}');
       const container = document.querySelector('div[style*="height: 80vh"]');
       
       const startPositions = [

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Result</title>
+  <link rel="stylesheet" href="../static/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+</head>
+<body class="main"> 
+  <img src="../static/Logo.png" alt="Logo" class="join-logo" onclick="window.location.href='/main'" style="margin-top: 150px;">
+  <div style="position: relative; height: 80vh;">
+    <div style="position: absolute; top: calc(50% - 150px); left: 50%; transform: translate(-50%, -50%); text-align: center; 
+                background: #FFCFEF; padding: 10px; border-radius: 10px; border: 2px solid #7E3064; width: 500px;">
+      <h2 style="color: #7E3064; font-family: 'Rubik', sans-serif; margin: 5px;">Enter your name to find your match:</h2>
+      <input type="text" style="width: 80%; padding: 10px; margin: 20px; border-radius: 5px; border: 2px solid #7E3064; font-family: 'Rubik', sans-serif; font-size: 18px;">
+      <button class="button" onclick="window.location.href='/result'">Find Match</button>
+    </div>
+  </div>
+</body>
+</html>
