@@ -1,0 +1,1 @@
+{"name": "an", "discord_handle": "an", "mbti": "INTJ", "preferred_gender": "Female", "other_gender": "", "communication_style": "Listener", "weekend_activity": "Spontaneous", "preference": "Freedom", "movie_genres": ["Action/Adventure", "Drama", "Comedy"], "party_frequency": "Rarely", "relationship_components": ["Trust", "Communication", "Flexibility"], "unicorn_belief": "Yes"}
