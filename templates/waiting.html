@@ -15,9 +15,23 @@
         <p style="color: #7E3064; margin: 0 auto; font-family: 'Rubik', sans-serif; font-size: 30px; width: 90%; text-align: center; margin-bottom: 30px;">
           We're finding your match<span class="loading-dots"></span></p>
         <div class="withtext-box" style="gap: 20px; display: flex; justify-content: center; width: 100%;">
-          <button class="button" onclick="window.location.href='/pre_result'">Refresh</button>
-          <!--change to refresh until we have a result -->
+          <button class="button" onclick="checkAndRedirect()">Refresh</button>
         </div>
+        <script>
+          async function checkAndRedirect() {
+            try {
+              const response = await fetch('/check_result');
+              const data = await response.json();
+              if (data.hasResult) {
+                window.location.href = '/pre_result';
+              } else {
+                window.location.href = '/waiting';
+              }
+            } catch (error) {
+              console.error('Error:', error);
+            }
+          }
+        </script>
       </div>
     </div>
 </body>

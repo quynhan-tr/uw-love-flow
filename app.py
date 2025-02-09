@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, session
+from flask import Flask, request, render_template, redirect, url_for, jsonify, session
 import json
 import os
 
@@ -77,6 +77,16 @@ def result():
             names.append(user_data['name'])
     
     return render_template('result.html', names=names)
+
+@app.route('/check_result')
+def check_result():
+    result_file = 'result.txt'
+    
+    # Check if the file exists and has content
+    if os.path.exists(result_file) and os.path.getsize(result_file) > 0:
+        return jsonify(hasResult=True)
+    else:
+        return jsonify(hasResult=False)
 
 
 if __name__ == '__main__':

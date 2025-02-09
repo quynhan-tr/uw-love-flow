@@ -30,11 +30,11 @@
 
         <!-- Question 3 -->
         <div>
-          <p>3. What gender would you prefer to be matched with?</p>
-          <label><input type="radio" name="preferred-gender" value="Male" onclick="hideOtherInput()"> Male</label>
-          <label><input type="radio" name="preferred-gender" value="Female" onclick="hideOtherInput()"> Female</label>
+          <p>3. What gender would you prefer to be matched with? (Select all that apply)</p>
+          <label><input type="checkbox" name="preferred-gender" value="Male"> Male</label>
+          <label><input type="checkbox" name="preferred-gender" value="Female"> Female</label>
           <label>
-            <input type="radio" name="preferred-gender" value="Other" onclick="showOtherInput()"> Other
+            <input type="checkbox" name="preferred-gender" value="Other" onclick="toggleOtherInput()"> Other
             <input type="text" id="other-gender" name="other-gender-input" style="display: none; width: 200px; margin-left: 10px;">
           </label>
         </div>
