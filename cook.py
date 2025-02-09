@@ -1,6 +1,9 @@
+from flask import Flask, request, render_template, redirect, url_for, jsonify, session
 import json
-from itertools import combinations
-from models import db, User, MatchResult
+import os
+from models import db, User, MatchResult 
+
+app = Flask(__name__)
 
 def calculate_mbti_compatibility(mbti1, mbti2):
     # Convert MBTIs to uppercase and validate format
@@ -230,4 +233,6 @@ def main():
     db.session.commit()
 
 if __name__ == "__main__":
-    main()
+    with app.app_context():
+        db.create_all()
+    app.run(debug=True)
