@@ -214,6 +214,11 @@ def find_best_matches(all_compatibilities):
                 round2_matched.add(user2)
         
         matches.extend(round2_matches)
+        
+        # Add unmatched users to matches list
+        for user in round2_participants:
+            if user not in round2_matched:
+                matches.append((user, None, 0, "No Match"))
     
     return matches
 
@@ -225,7 +230,11 @@ def write_matches_to_file(matches):
                 for line in data_file:
                     user_data = json.loads(line)
                     discord_handles[user_data['name']] = user_data['discord_handle']
-            f.write(f"{round_type} - {user1} ({discord_handles[user1]}) - {user2} ({discord_handles[user2]}) - {score:.2f}\n")
+            
+            if round_type == "No Match":
+                f.write(f"{user1} ({discord_handles[user1]}) - No match found\n")
+            else:
+                f.write(f"{round_type} - {user1} ({discord_handles[user1]}) - {user2} ({discord_handles[user2]}) - {score:.2f}\n")
 
 def main():
     # Calculate compatibilities for all users
