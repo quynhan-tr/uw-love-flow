@@ -13,8 +13,13 @@
     <div style="position: absolute; top: calc(50% - 150px); left: 50%; transform: translate(-50%, -50%); text-align: center; 
                 background: #FFCFEF; padding: 10px; border-radius: 10px; border: 2px solid #7E3064; width: 500px;">
       <h2 style="color: #7E3064; font-family: 'Rubik', sans-serif; margin: 5px;">Enter your name to find your match:</h2>
-      <input type="text" style="width: 80%; padding: 10px; margin: 20px; border-radius: 5px; border: 2px solid #7E3064; font-family: 'Rubik', sans-serif; font-size: 18px;">
-      <button class="button" onclick="window.location.href='/result'">Find Match</button>
+      {% if error %}
+      <p style="color: rgb(221, 29, 29);">{{ error }}</p>
+      {% endif %}
+      <form action="/result" method="GET">
+        <input type="text" name="name" style="width: 80%; padding: 10px; margin: 10px 20px 20px 20px; border-radius: 5px; border: 2px solid #7E3064; font-family: 'Rubik', sans-serif; font-size: 18px;">
+        <button type="submit" class="button">Find Match</button>
+      </form>
     </div>
   </div>
 </body>

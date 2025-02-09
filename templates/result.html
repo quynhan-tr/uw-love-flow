@@ -35,9 +35,13 @@
                   background: #FFCFEF; padding: 10px; border-radius: 10px; border: 2px solid #7E3064; width: 500px;">
         <h2 style="color: #7E3064; font-family: 'Rubik', sans-serif; margin: 5px;">Your Match Results</h2>
         <p style="color: #7E3064; font-family: 'Rubik', sans-serif; font-size: 22px; margin: 10px; font-weight: bold;">
+          {% if match_name %}
           Your match is: <br>
           <strong style="font-size: 22px;">{{ match_name }}</strong> <br>
           Discord: <strong style="font-size: 22px;">{{ match_discord }}</strong>
+          {% else %}
+          "Sorry we can't find your match today. But come up to us and get a free nice and huggy teddy"
+          {% endif %}
         </p>
       </div>
     </div>
