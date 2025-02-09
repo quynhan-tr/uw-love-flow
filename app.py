@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, redirect, url_for, jsonify, s
 import json
 from flask_sqlalchemy import SQLAlchemy
 import os
+from cook import main as run_cook_logic  # Import the main function from cook.py
 
 app = Flask(__name__)
 app.secret_key = 'uw_dsc_speed_dating' 
@@ -185,6 +186,11 @@ def result():
                              match_name=match_name, 
                              match_discord=match_discord,
                              names=names)
+
+@app.route('/run-cook')
+def run_cook():
+    run_cook_logic()  # Call the main function from cook.py
+    return "cook.py logic executed!"
 
 if __name__ == '__main__':
     with app.app_context():

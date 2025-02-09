@@ -36,14 +36,14 @@ def calculate_compatibility(user1, user2):
     score = 0
 
     # Question 1: MBTI
-    score += calculate_mbti_compatibility(user1['mbti'], user2['mbti'])
+    score += calculate_mbti_compatibility(user1.mbti, user2.mbti)
 
     # Question 2 & 3: Gender Preference
-    if user1['gender'] not in user2['preferred_gender'] or user2['gender'] not in user1['preferred_gender']:
+    if user1.gender not in user2.preferred_gender or user2.gender not in user1.preferred_gender:
         return 0
 
     # Question 4: Conversationalist or Listener
-    if user1['communication_style'] != user2['communication_style']:
+    if user1.communication_style != user2.communication_style:
         score += 5
     else:
         score += 3
@@ -61,14 +61,16 @@ def calculate_compatibility(user1, user2):
         ('Spontaneous', 'Alone'): 3,
         ('Alone', 'Alone'): 5
     }
-    score += activity_scores.get((user1['weekend_activity'], user2['weekend_activity']), 0)
+    score += activity_scores.get((user1.weekend_activity, user2.weekend_activity), 0)
 
     # Question 6: Money or Freedom
-    if user1['preference'] == user2['preference']:
+    if user1.preference == user2.preference:
         score += 5
 
     # Question 7: Movie Genres
-    common_genres = set(user1['movie_genres']).intersection(user2['movie_genres'])
+    user1_genres = set(user1.movie_genres.split(','))
+    user2_genres = set(user2.movie_genres.split(','))
+    common_genres = user1_genres.intersection(user2_genres)
     if len(common_genres) == 3:
         score += 5
     elif len(common_genres) == 2:
@@ -80,14 +82,14 @@ def calculate_compatibility(user1, user2):
 
     if 'Anime' in common_genres:
         score += 1
-    if 'Horror/Thriller' in user1['movie_genres'] and 'Horror/Thriller' not in user2['movie_genres']:
+    if 'Horror/Thriller' in user1_genres and 'Horror/Thriller' not in user2_genres:
         score -= 1
-    if 'Horror/Thriller' in user2['movie_genres'] and 'Horror/Thriller' not in user1['movie_genres']:
+    if 'Horror/Thriller' in user2_genres and 'Horror/Thriller' not in user1_genres:
         score -= 1
 
     # Question 8: Party Frequency
     party_levels = ['Never', 'Rarely', 'Sometimes', 'Usually']
-    level_diff = abs(party_levels.index(user1['party_frequency']) - party_levels.index(user2['party_frequency']))
+    level_diff = abs(party_levels.index(user1.party_frequency) - party_levels.index(user2.party_frequency))
     if level_diff == 0:
         score += 5
     elif level_diff == 1:
@@ -96,7 +98,9 @@ def calculate_compatibility(user1, user2):
         score += 2
 
     # Question 9: Relationship Components
-    common_components = set(user1['relationship_components']).intersection(user2['relationship_components'])
+    user1_components = set(user1.relationship_components.split(','))
+    user2_components = set(user2.relationship_components.split(','))
+    common_components = user1_components.intersection(user2_components)
     if len(common_components) == 3:
         score += 5
     elif len(common_components) == 2:
@@ -108,7 +112,7 @@ def calculate_compatibility(user1, user2):
 
     # Question 10: Belief in Fate
     fate_levels = ['Nonsense', 'Depends', 'Yes']
-    level_diff = abs(fate_levels.index(user1['fate_belief']) - fate_levels.index(user2['fate_belief']))
+    level_diff = abs(fate_levels.index(user1.fate_belief) - fate_levels.index(user2.fate_belief))
     if level_diff == 0:
         score += 5
     elif level_diff == 1:
@@ -211,24 +215,15 @@ def find_best_matches(all_compatibilities):
     
     return matches
 
-def write_matches_to_file(matches):
-    with open('result.txt', 'w') as f:
-        for user1, user2, score, round_type in matches:
-            with open('data.txt', 'r') as data_file:
-                discord_handles = {}
-                for line in data_file:
-                    user_data = json.loads(line)
-                    discord_handles[user_data['name']] = user_data['discord_handle']
-            
-            if round_type == "No Match":
-                f.write(f"{user1} ({discord_handles[user1]}) - No match found\n")
-            else:
-                f.write(f"{round_type} - {user1} ({discord_handles[user1]}) - {user2} ({discord_handles[user2]}) - {score:.2f}\n")
-
 def main():
+    # Clear previous match results
+    MatchResult.query.delete()
+
+    # Calculate compatibilities and find matches
     compatibilities = calculate_all_compatibilities()
     matches = find_best_matches(compatibilities)
 
+    # Store matches in the database
     for user1_id, user2_id, score, round_type in matches:
         match_result = MatchResult(user1_id=user1_id, user2_id=user2_id, score=score, round_type=round_type)
         db.session.add(match_result)
