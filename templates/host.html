@@ -10,16 +10,6 @@
     .hidden {
       display: none;
     }
-    .button {
-      margin: 10px;
-      padding: 10px 20px;
-      background-color: #7E3064;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-family: 'Rubik', sans-serif;
-    }
   </style>
 </head>
 <body class="host">
@@ -34,9 +24,11 @@
       </div>
 
       <div id="admin-buttons" class="hidden">
-        <button class="button" onclick="executeAction('/run-cook')">Cook</button>
-        <button class="button" onclick="executeAction('/delete-results')">Delete Results</button>
-        <button class="button" onclick="executeAction('/delete-for-real')">Delete All</button>
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+            <button class="button" onclick="executeAction('/run-cook')">Cook</button>
+            <button class="button" onclick="executeAction('/delete-results')">Delete Results</button>
+            <button class="button" onclick="executeAction('/delete-for-real')">Delete All</button>
+        </div>
       </div>
     </div>
 
