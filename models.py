@@ -23,4 +23,4 @@ class MatchResult(db.Model):
     user1_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user2_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     score = db.Column(db.Float, nullable=False)
-    round_type = db.Column(db.String(20), nullable=False) 
+    message = db.Column(db.Text, nullable=True) 
