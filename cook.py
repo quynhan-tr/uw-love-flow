@@ -141,7 +141,6 @@ def calculate_all_compatibilities():
 def find_best_matches(all_compatibilities):
     matched_users = set()
     matches = []
-    round2_participants = []
 
     # Round 1: Find matches with balanced compatibility scores
     while True:
@@ -176,46 +175,6 @@ def find_best_matches(all_compatibilities):
         matches.append((user1, user2, score, "Round 1"))
         matched_users.add(user1)
         matched_users.add(user2)
-    
-    # Collect unmatched users for Round 2
-    for user in all_compatibilities:
-        if user not in matched_users:
-            round2_participants.append(user)
-    
-    # Round 2: Match remaining users ignoring gender/communication preferences
-    if round2_participants:
-        round2_matches = []
-        round2_matched = set()
-        
-        for user1 in round2_participants:
-            if user1 in round2_matched:
-                continue
-                
-            best_match = None
-            best_score = -1
-            
-            for user2 in round2_participants:
-                if user1 != user2 and user2 not in round2_matched:
-                    score1 = all_compatibilities[user1][user2]
-                    score2 = all_compatibilities[user2][user1]
-                    avg_score = (score1 + score2) / 2
-                    
-                    if avg_score > best_score:
-                        best_score = avg_score
-                        best_match = (user2, avg_score)
-            
-            if best_match:
-                user2, score = best_match
-                round2_matches.append((user1, user2, score, "Round 2"))
-                round2_matched.add(user1)
-                round2_matched.add(user2)
-        
-        matches.extend(round2_matches)
-        
-        # Add unmatched users to matches list
-        for user in round2_participants:
-            if user not in round2_matched:
-                matches.append((user, None, 0, "No Match"))
     
     return matches
 

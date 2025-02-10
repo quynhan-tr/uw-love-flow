@@ -39,6 +39,7 @@ def friendship_quiz():
         name = request.form.get('name')
         discord_handle = request.form.get('discord')
         mbti = request.form.get('mbti')
+        message = request.form.get('message')  # Capture the optional message
         # Add other fields as necessary
 
         if not name or not discord_handle or not mbti:
@@ -58,7 +59,8 @@ def friendship_quiz():
                 movie_genres=','.join(request.form.getlist('movie-genres')),
                 party_frequency=request.form.get('party-frequency'),
                 relationship_components=','.join(request.form.getlist('relationship-components')),
-                fate_belief=request.form.get('fate')
+                fate_belief=request.form.get('fate'),
+                message=message  # Store the message
             )
             # Add the user to the database session
             db.session.add(user)
@@ -117,6 +119,7 @@ def result():
     return render_template('result.html',
                            match_name=matched_user.name if matched_user else None,
                            match_discord=matched_user.discord_handle if matched_user else None,
+                           match_message=matched_user.message if matched_user else None,
                            round_2_message="We're sorry that some of your preferences might not be satisfied due to gender ratio" if match_result.round_type == "Round 2" else None,
                            names=get_all_names())
 
@@ -128,6 +131,19 @@ def get_all_names():
 def run_cook():
     run_cook_logic()  # Call the main function from cook.py
     return "cook.py logic executed!"
+
+@app.route('/delete-for-real')
+def delete_for_real():
+    try:
+        # Delete all entries from the User and MatchResult tables
+        num_users_deleted = User.query.delete()
+        num_matches_deleted = MatchResult.query.delete()
+        db.session.commit()
+        logging.info(f"Deleted {num_users_deleted} users and {num_matches_deleted} match results.")
+        return "All user inputs and match results have been deleted."
+    except Exception as e:
+        logging.error("Error deleting data: %s", e)
+        return "An error occurred while deleting data.", 500
 
 if __name__ == '__main__':
     app.run(debug=True)

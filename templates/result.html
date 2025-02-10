@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Result</title>
+  <title>Match Result</title>
   <link rel="stylesheet" href="../static/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
 </head>
@@ -36,11 +36,13 @@
         <h2 style="color: #7E3064; font-family: 'Rubik', sans-serif; margin: 5px;">Your Match Results</h2>
         <p style="color: #7E3064; font-family: 'Rubik', sans-serif; font-size: 22px; margin: 10px; font-weight: bold;">
           {% if match_name %}
-          Your match is: <br>
-          <strong style="font-size: 22px;">{{ match_name }}</strong> <br>
-          Discord: <strong style="font-size: 22px;">{{ match_discord }}</strong>
+          <p>You have been matched with {{ match_name }}.</p>
+          <p>Discord Handle: {{ match_discord }}</p>
+          {% if match_message %}
+              <p style="color: #ac5890;">Message: "{{ match_message }}"</p>
+          {% endif %}
           {% else %}
-          "Sorry we can't find your match today. But come up to us and get a free nice and huggy teddy"
+          <p>"Sorry we can't find your match today. But come up to us and get a free nice and huggy teddy"</p>
           {% endif %}
         </p>
       </div>
