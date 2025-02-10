@@ -98,15 +98,15 @@ def host():
 
 @app.route('/result')
 def result():
-    # Get name from query parameter
-    name = request.args.get('name')
-    if not name:
+    # Get discord handle from query parameter
+    discord_handle = request.args.get('discord')
+    if not discord_handle:
         return redirect(url_for('pre_result'))
 
     # Check if the user exists
-    user = User.query.filter_by(name=name).first()
+    user = User.query.filter_by(discord_handle=discord_handle).first()
     if not user:
-        return render_template('pre_result.html', error="Name not found. Please re-enter your name.", matches_exist=True)
+        return render_template('pre_result.html', error="Discord handle not found. Please re-enter your Discord handle.", matches_exist=True)
 
     # Get the match result for the user
     match_result = MatchResult.query.filter_by(user1_id=user.id).first()
