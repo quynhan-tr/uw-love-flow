@@ -10,20 +10,33 @@
     .hidden {
       display: none;
     }
+
     .button-container {
       display: flex;
+      flex-direction: column; /* Arrange buttons vertically */
       justify-content: center;
       align-items: center;
-      gap: 10px; /* Space between buttons */
+    }
+
+    .box {
+      position: absolute;
+      top: calc(50% - 150px);
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      background: #FFCFEF;
+      padding: 20px;
+      border-radius: 10px;
+      border: 3px solid #7E3064; /* Match border thickness with button */
+      width: 500px;
     }
   </style>
 </head>
 <body class="host">
-    <img src="../static/Logo.png" alt="Logo" class="logo" onclick="window.location.href='/main'">
+    <img src="../static/Logo.png" alt="Logo" class="logo" onclick="window.location.href='/main'" style="margin-top: -300px;">
 
     <div style="position: relative; height: 80vh;">
-      <div id="password-section" style="position: absolute; top: calc(50% - 150px); left: 50%; transform: translate(-50%, -50%); text-align: center; 
-                  background: #FFCFEF; padding: 20px; border-radius: 10px; border: 3px solid #7E3064; width: 500px;">
+      <div id="password-section" class="box">
         <h2 style="color: #7E3064; font-family: 'Rubik', sans-serif; margin: 5px;">Enter Password</h2>
         <input type="password" id="password" style="width: 80%; padding: 10px; margin: 10px 20px 20px 20px; border-radius: 5px; border: 2px solid #7E3064; font-family: 'Rubik', sans-serif; font-size: 18px;">
         <button class="button" onclick="checkPassword()">Continue as host</button>
