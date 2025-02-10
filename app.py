@@ -149,7 +149,8 @@ def delete_results():
         num_matches_deleted = MatchResult.query.delete()
         db.session.commit()
         logging.info(f"Deleted {num_matches_deleted} match results.")
-        return "All match results have been deleted. You can now perform a rematch."
+        # Redirect to the waiting page
+        return redirect(url_for('waiting'))
     except Exception as e:
         logging.error("Error deleting match results: %s", e)
         return "An error occurred while deleting match results.", 500
