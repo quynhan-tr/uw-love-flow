@@ -120,7 +120,6 @@ def result():
                            match_name=matched_user.name if matched_user else None,
                            match_discord=matched_user.discord_handle if matched_user else None,
                            match_message=matched_user.message if matched_user else None,
-                           round_2_message="We're sorry that some of your preferences might not be satisfied due to gender ratio" if match_result.round_type == "Round 2" else None,
                            names=get_all_names())
 
 def get_all_names():

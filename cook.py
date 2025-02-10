@@ -187,8 +187,8 @@ def main():
     matches = find_best_matches(compatibilities)
 
     # Store matches in the database
-    for user1_id, user2_id, score, round_type in matches:
-        match_result = MatchResult(user1_id=user1_id, user2_id=user2_id, score=score, round_type=round_type)
+    for user1_id, user2_id, score, message in matches:
+        match_result = MatchResult(user1_id=user1_id, user2_id=user2_id, score=score, message=message)
         db.session.add(match_result)
     db.session.commit()
 
