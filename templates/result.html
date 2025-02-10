@@ -6,51 +6,65 @@
   <title>Match Result</title>
   <link rel="stylesheet" href="../static/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+  <style>
+    .floating-name {
+      position: fixed;
+      color: #e699c9;
+      font-family: 'Rubik', sans-serif;
+      font-size: 32px;
+      font-weight: bold;
+      animation: float 20s linear infinite;
+      opacity: 0.7;
+      z-index: 1;
+    }
+    @keyframes float {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(100px, 100px); }
+      50% { transform: translate(0, 200px); }
+      75% { transform: translate(-100px, 100px); }
+      100% { transform: translate(0, 0); }
+    }
+    .hidden {
+      display: none;
+    }
+    .button {
+      margin: 10px;
+      padding: 10px 20px;
+      background-color: #7E3064;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: 'Rubik', sans-serif;
+    }
+  </style>
 </head>
 <body class="main">
     <img src="../static/Logo.png" alt="Logo" class="join-logo" onclick="window.location.href='/main'" style="margin-top: 150px;">
-    <style>
-      .floating-name {
-        position: fixed;
-        color: #e699c9;
-        font-family: 'Rubik', sans-serif;
-        font-size: 32px;
-        font-weight: bold;
-        animation: float 20s linear infinite;
-        opacity: 0.7;
-        z-index: 1;
-      }
-      @keyframes float {
-        0% { transform: translate(0, 0); }
-        25% { transform: translate(100px, 100px); }
-        50% { transform: translate(0, 200px); }
-        75% { transform: translate(-100px, 100px); }
-        100% { transform: translate(0, 0); }
-      }
-
-    </style>
 
     <div style="position: relative; height: 80vh;">
       <div style="position: absolute; top: calc(50% - 150px); left: 50%; transform: translate(-50%, -50%); text-align: center; 
                   background: #FFCFEF; padding: 10px; border-radius: 10px; border: 2px solid #7E3064; width: 500px;">
-        <h2 style="color: #7E3064; font-family: 'Rubik', sans-serif; margin: 5px;">Your Match Results</h2>
-        <p style="color: #7E3064; font-family: 'Rubik', sans-serif; font-size: 22px; margin: 10px; font-weight: bold;">
-          {% if match_name and match_name != "dummy" %}
-          <p>You have been matched with {{ match_name }}.</p>
-          <p>Discord Handle: {{ match_discord }}</p>
-          {% if match_message %}
-              <p style="color: #ac5890;">Message: "{{ match_message }}"</p>
-          {% endif %}
-          {% else %}
-          <p>"Sorry we can't find your match today. But come up to us and get a free nice and huggy teddy"</p>
-          {% endif %}
-        </p>
+        <h2 style="color: #7E3064; font-family: 'Rubik', sans-serif; margin: 5px;">Enter Password</h2>
+        <input type="password" id="password" style="width: 80%; padding: 10px; margin: 10px 20px 20px 20px; border-radius: 5px; border: 2px solid #7E3064; font-family: 'Rubik', sans-serif; font-size: 18px;">
+        <button class="button" onclick="checkPassword()">Submit</button>
+        
+        <div id="admin-buttons" class="hidden">
+          <button class="button" onclick="window.location.href='/run-cook'">Cook</button>
+          <button class="button" onclick="window.location.href='/delete-results'">Delete Results</button>
+          <button class="button" onclick="window.location.href='/delete-for-real'">Delete All</button>
+        </div>
       </div>
     </div>
+
     <script>
-      function showMatch(event) {
-        event.preventDefault();
-        document.getElementById('matchResult').style.display = 'block';
+      function checkPassword() {
+        const password = document.getElementById('password').value;
+        if (password === "uw data science - goated events") {
+          document.getElementById('admin-buttons').classList.remove('hidden');
+        } else {
+          alert("Incorrect password. Please try again.");
+        }
       }
     </script>
 

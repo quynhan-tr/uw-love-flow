@@ -6,9 +6,49 @@
   <title>Host</title>
   <link rel="stylesheet" href="../static/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+  <style>
+    .hidden {
+      display: none;
+    }
+    .button {
+      margin: 10px;
+      padding: 10px 20px;
+      background-color: #7E3064;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: 'Rubik', sans-serif;
+    }
+  </style>
 </head>
 <body class="host">
     <img src="../static/Logo.png" alt="Logo" class="logo" onclick="window.location.href='/main'">
-    <p style="color: #b9649d; font-size: 20px; margin-top: -20px;">Work in progress<span class="loading-dots"></span></p>
+
+    <div style="position: relative; height: 80vh;">
+      <div style="position: absolute; top: calc(50% - 150px); left: 50%; transform: translate(-50%, -50%); text-align: center; 
+                  background: #FFCFEF; padding: 10px; border-radius: 10px; border: 2px solid #7E3064; width: 500px;">
+        <h2 style="color: #7E3064; font-family: 'Rubik', sans-serif; margin: 5px;">Enter Password</h2>
+        <input type="password" id="password" style="width: 80%; padding: 10px; margin: 10px 20px 20px 20px; border-radius: 5px; border: 2px solid #7E3064; font-family: 'Rubik', sans-serif; font-size: 18px;">
+        <button class="button" onclick="checkPassword()">Submit</button>
+        
+        <div id="admin-buttons" class="hidden">
+          <button class="button" onclick="window.location.href='/run-cook'">Cook</button>
+          <button class="button" onclick="window.location.href='/delete-results'">Delete Results</button>
+          <button class="button" onclick="window.location.href='/delete-for-real'">Delete All</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function checkPassword() {
+        const password = document.getElementById('password').value;
+        if (password === "uw data science - goated events") {
+          document.getElementById('admin-buttons').classList.remove('hidden');
+        } else {
+          alert("Incorrect password. Please try again.");
+        }
+      }
+    </script>
 </body>
 </html>
