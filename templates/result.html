@@ -35,7 +35,7 @@
                   background: #FFCFEF; padding: 10px; border-radius: 10px; border: 2px solid #7E3064; width: 500px;">
         <h2 style="color: #7E3064; font-family: 'Rubik', sans-serif; margin: 5px;">Your Match Results</h2>
         <p style="color: #7E3064; font-family: 'Rubik', sans-serif; font-size: 22px; margin: 10px; font-weight: bold;">
-          {% if match_name %}
+          {% if match_name and match_name != "dummy" %}
           <p>You have been matched with {{ match_name }}.</p>
           <p>Discord Handle: {{ match_discord }}</p>
           {% if match_message %}

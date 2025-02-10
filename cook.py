@@ -3,6 +3,10 @@ import json
 import os
 from models import db, User, MatchResult 
 import logging
+from scipy.optimize import linear_sum_assignment
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
+import numpy as np
 
 app = Flask(__name__)
 
@@ -36,7 +40,7 @@ def calculate_mbti_compatibility(mbti1, mbti2):
     
     return compatibility_score
 
-def calculate_compatibility(user1, user2):
+def calculate_compatibility(user1, user2): 
     score = 0
 
     # Question 1: MBTI
@@ -122,6 +126,10 @@ def calculate_compatibility(user1, user2):
     elif level_diff == 1:
         score += 3
 
+    # Decrease score if either user is dummy
+    if user1.name == 'dummy' or user2.name == 'dummy':
+        score -= 20
+
     return score
 
 def calculate_all_compatibilities():
@@ -139,43 +147,52 @@ def calculate_all_compatibilities():
     return all_compatibilities
 
 def find_best_matches(all_compatibilities):
-    matched_users = set()
-    matches = []
+    # Convert the compatibility dictionary to a matrix
+    user_ids = list(all_compatibilities.keys())
+    n = len(user_ids)
 
-    # Round 1: Find matches with balanced compatibility scores
-    while True:
-        best_pair = None
-        best_avg_score = -1
-        
-        # Check all possible pairs
-        for user1 in all_compatibilities:
-            if user1 in matched_users:
-                continue
-                
-            for user2, score1 in all_compatibilities[user1].items():
-                if user2 in matched_users:
-                    continue
-                    
-                # Get reverse compatibility score
-                score2 = all_compatibilities[user2][user1]
-                avg_score = (score1 + score2) / 2
-                
-                # Check if scores are balanced (within 5 points of average)
-                if abs(score1 - avg_score) <= 5 and abs(score2 - avg_score) <= 5:
-                    if avg_score > best_avg_score:
-                        best_avg_score = avg_score
-                        best_pair = (user1, user2, avg_score)
-        
-        # If no valid pair found, break
-        if best_pair is None:
-            break
-            
-        # Add pair to matches
-        user1, user2, score = best_pair
-        matches.append((user1, user2, score, "Round 1"))
-        matched_users.add(user1)
-        matched_users.add(user2)
-    
+    # Add a dummy user if the number of users is odd
+    if n % 2 != 0:
+        dummy_user = User(
+            name="dummy",
+            discord_handle="dummy",
+            mbti="ESTP",
+            gender="Male",
+            preferred_gender="Male,Female",
+            communication_style="Listener",
+            weekend_activity="Chill",
+            preference="Money",
+            movie_genres="Action/Adventure,Drama,Comedy",
+            party_frequency="Sometimes",
+            relationship_components="Trust,Communication,Respect",
+            fate_belief="Depends",
+            message="This is a dummy user for balancing."
+        )
+        db.session.add(dummy_user)
+        db.session.commit()
+        user_ids.append(dummy_user.id)
+        n += 1
+
+    cost_matrix = np.zeros((n, n))
+
+    for i, user1 in enumerate(user_ids):
+        for j, user2 in enumerate(user_ids):
+            if user1 != user2:
+                # Use negative scores because the algorithm finds the minimum cost
+                cost_matrix[i, j] = -all_compatibilities.get(user1, {}).get(user2, 0)
+
+    # Apply the Hungarian Algorithm
+    row_ind, col_ind = linear_sum_assignment(cost_matrix)
+
+    # Create matches based on the assignment
+    matches = []
+    for i, j in zip(row_ind, col_ind):
+        if i != j:  # Ensure no self-matching
+            user1_id = user_ids[i]
+            user2_id = user_ids[j]
+            score = -cost_matrix[i, j]  # Convert back to positive score
+            matches.append((user1_id, user2_id, score))
+
     return matches
 
 def main():
