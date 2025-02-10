@@ -10,6 +10,12 @@
     .hidden {
       display: none;
     }
+    .button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px; /* Space between buttons */
+    }
   </style>
 </head>
 <body class="host">
@@ -17,14 +23,14 @@
 
     <div style="position: relative; height: 80vh;">
       <div id="password-section" style="position: absolute; top: calc(50% - 150px); left: 50%; transform: translate(-50%, -50%); text-align: center; 
-                  background: #FFCFEF; padding: 10px; border-radius: 10px; border: 2px solid #7E3064; width: 500px;">
+                  background: #FFCFEF; padding: 20px; border-radius: 10px; border: 3px solid #7E3064; width: 500px;">
         <h2 style="color: #7E3064; font-family: 'Rubik', sans-serif; margin: 5px;">Enter Password</h2>
         <input type="password" id="password" style="width: 80%; padding: 10px; margin: 10px 20px 20px 20px; border-radius: 5px; border: 2px solid #7E3064; font-family: 'Rubik', sans-serif; font-size: 18px;">
         <button class="button" onclick="checkPassword()">Continue as host</button>
       </div>
 
       <div id="admin-buttons" class="hidden">
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+        <div class="button-container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
             <button class="button" onclick="executeAction('/run-cook')">Cook</button>
             <button class="button" onclick="executeAction('/delete-results')">Delete Results</button>
             <button class="button" onclick="executeAction('/delete-for-real')">Delete All</button>
