@@ -43,11 +43,15 @@
     <script>
       function checkPassword() {
         const password = document.getElementById('password').value;
-        if (password === "uw data science - goated events") {
-          document.getElementById('admin-buttons').classList.remove('hidden');
-        } else {
-          alert("Incorrect password. Please try again.");
-        }
+        fetch('/get-password')
+          .then(response => response.json())
+          .then(data => {
+            if (password === data.password) {
+              document.getElementById('admin-buttons').classList.remove('hidden');
+            } else {
+              alert("Incorrect password. Please try again.");
+            }
+          });
       }
     </script>
 </body>

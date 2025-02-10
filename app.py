@@ -4,6 +4,10 @@ import os
 from models import db, User, MatchResult  # Import from models.py
 from cook import main as run_cook_logic  # Import the main function from cook.py
 import logging
+from dotenv import load_dotenv  # Import the load_dotenv function
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = 'uw_dsc_speed_dating' 
@@ -153,6 +157,10 @@ def delete_results():
     except Exception as e:
         logging.error("Error deleting match results: %s", e)
         return "An error occurred while deleting match results.", 500
+
+@app.route('/get-password')
+def get_password():
+    return jsonify(password=os.getenv('ADMIN_PASSWORD'))
 
 if __name__ == '__main__':
     app.run(debug=True)
