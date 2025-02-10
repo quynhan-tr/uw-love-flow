@@ -191,7 +191,10 @@ def find_best_matches(all_compatibilities):
             user1_id = user_ids[i]
             user2_id = user_ids[j]
             score = -cost_matrix[i, j]  # Convert back to positive score
-            matches.append((user1_id, user2_id, score))
+            user1 = User.query.get(user1_id)
+            user2 = User.query.get(user2_id)
+            message = user1.message if user1 else "No message"
+            matches.append((user1_id, user2_id, score, message))
 
     return matches
 
