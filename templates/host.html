@@ -30,13 +30,13 @@
                   background: #FFCFEF; padding: 10px; border-radius: 10px; border: 2px solid #7E3064; width: 500px;">
         <h2 style="color: #7E3064; font-family: 'Rubik', sans-serif; margin: 5px;">Enter Password</h2>
         <input type="password" id="password" style="width: 80%; padding: 10px; margin: 10px 20px 20px 20px; border-radius: 5px; border: 2px solid #7E3064; font-family: 'Rubik', sans-serif; font-size: 18px;">
-        <button class="button" onclick="checkPassword()">Submit</button>
+        <button class="button" onclick="checkPassword()">Continue as host</button>
       </div>
 
       <div id="admin-buttons" class="hidden">
-        <button class="button" onclick="window.location.href='/run-cook'">Cook</button>
-        <button class="button" onclick="window.location.href='/delete-results'">Delete Results</button>
-        <button class="button" onclick="window.location.href='/delete-for-real'">Delete All</button>
+        <button class="button" onclick="executeAction('/run-cook')">Cook</button>
+        <button class="button" onclick="executeAction('/delete-results')">Delete Results</button>
+        <button class="button" onclick="executeAction('/delete-for-real')">Delete All</button>
       </div>
     </div>
 
@@ -52,6 +52,17 @@
             } else {
               alert("Incorrect password. Please try again.");
             }
+          });
+      }
+
+      function executeAction(url) {
+        fetch(url)
+          .then(response => response.text())
+          .then(message => {
+            alert(message);
+          })
+          .catch(error => {
+            alert("An error occurred: " + error);
           });
       }
     </script>
