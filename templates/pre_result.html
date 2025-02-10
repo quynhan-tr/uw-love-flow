@@ -7,17 +7,21 @@
   <link rel="stylesheet" href="../static/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
 </head>
-<body class="pre-result">
-    <img src="../static/Logo.png" alt="Logo" class="logo">
-    <div class="box">
-        <h2>Enter your Discord handle to see your match results</h2>
-        <form method="GET" action="/result">
-            <input type="text" name="discord" placeholder="Enter your Discord handle" required>
-            <button type="submit" class="button">Submit</button>
-        </form>
-        {% if error %}
-            <p style="color: red;">{{ error }}</p>
-        {% endif %}
+<body class="main"> 
+  <img src="../static/Logo.png" alt="Logo" class="join-logo" onclick="window.location.href='/main'" style="margin-top: 150px;">
+  <div style="position: relative; height: 80vh;">
+    <div style="position: absolute; top: calc(50% - 150px); left: 50%; transform: translate(-50%, -50%); text-align: center; 
+                background: #FFCFEF; padding: 10px; border-radius: 10px; border: 2px solid #7E3064; width: 500px;">
+      <h2 style="color: #7E3064; font-family: 'Rubik', sans-serif; margin: 5px;">Enter your discord handle to find your match:</h2>
+      {% if error %}
+      <p style="color: rgb(221, 29, 29);">{{ error }}</p>
+      {% else %}
+      <form action="/result" method="GET">
+        <input type="text" name="discord" style="width: 80%; padding: 10px; margin: 10px 20px 20px 20px; border-radius: 5px; border: 2px solid #7E3064; font-family: 'Rubik', sans-serif; font-size: 18px;">
+        <button type="submit" class="button">Find Match</button>
+      </form>
+      {% endif %}
     </div>
+  </div>
 </body>
 </html>
