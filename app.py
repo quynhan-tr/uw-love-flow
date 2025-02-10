@@ -4,7 +4,6 @@ import os
 from models import db, User, MatchResult  # Import from models.py
 from cook import main as run_cook_logic  # Import the main function from cook.py
 import logging
-from flask_migrate import Migrate
 
 app = Flask(__name__)
 app.secret_key = 'uw_dsc_speed_dating' 
@@ -19,9 +18,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
 logging.basicConfig(level=logging.DEBUG)
-
-# After initializing your app and db
-migrate = Migrate(app, db)
 
 @app.before_request
 def create_tables():
