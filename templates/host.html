@@ -33,7 +33,7 @@
   </style>
 </head>
 <body class="host">
-    <img src="../static/Logo.png" alt="Logo" class="logo" onclick="window.location.href='/main'" style="margin-top: -300px;">
+    <img src="../static/Logo.png" alt="Logo" class="logo" onclick="window.location.href='/main'" style="margin-top: 300px;">
 
     <div style="position: relative; height: 80vh;">
       <div id="password-section" class="box">
@@ -44,8 +44,8 @@
 
       <div id="admin-buttons" class="hidden">
         <div class="button-container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
-            <button class="button" onclick="executeAction('/run-cook')">Cook</button>
-            <button class="button" onclick="executeAction('/delete-results')">Delete Results</button>
+            <button class="button" style="margin-bottom: 15px;" onclick="executeAction('/run-cook')">Cook</button>
+            <button class="button" style="margin-bottom: 15px;" onclick="executeAction('/delete-results')">Delete Results</button>
             <button class="button" onclick="executeAction('/delete-for-real')">Delete All</button>
         </div>
       </div>
