@@ -31,7 +31,7 @@
       </div>
 
       <div id="admin-buttons" class="hidden">
-        <div class="button-container" style="position: absolute; top: calc(50% - 500px); left: 50%; transform: translate(-50%, -50%); text-align: center;">
+        <div class="button-container" style="position: absolute; top: calc(50% - 100px); left: 50%; transform: translate(-50%, -50%); text-align: center;">
             <button class="button" style="width: 300px; margin-bottom: 15px;" onclick="executeAction('/run-cook')">Cook</button>
             <button class="button" style="width: 300px; margin-bottom: 15px;" onclick="executeAction('/delete-results')">Delete Results</button>
             <button class="button" style="width: 300px;" onclick="executeAction('/delete-for-real')">Delete All</button>
@@ -39,31 +39,6 @@
       </div>
     </div>
 
-    <script>
-      function checkPassword() {
-        const password = document.getElementById('password').value;
-        fetch('/get-password')
-          .then(response => response.json())
-          .then(data => {
-            if (password === data.password) {
-              document.getElementById('admin-buttons').classList.remove('hidden');
-              document.getElementById('password-section').classList.add('hidden');
-            } else {
-              alert("Incorrect password. Please try again.");
-            }
-          });
-      }
-
-      function executeAction(url) {
-        fetch(url)
-          .then(response => response.text())
-          .then(message => {
-            alert(message);
-          })
-          .catch(error => {
-            alert("An error occurred: " + error);
-          });
-      }
-    </script>
+    <script src="../static/host.js"></script>
 </body>
 </html>
