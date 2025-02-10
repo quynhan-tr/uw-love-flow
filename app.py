@@ -87,7 +87,7 @@ def check_result():
     # Check if matches exist in the database
     matches_exist = MatchResult.query.first() is not None
     if matches_exist:
-        return redirect(url_for('pre_result'))
+        return render_template('pre_result.html', matches_exist=matches_exist)
     return render_template('waiting.html')
 
 @app.route('/host')
