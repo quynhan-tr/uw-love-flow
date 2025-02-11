@@ -20,6 +20,6 @@ document.getElementById('friendship-quiz-form').addEventListener('submit', funct
     event.preventDefault();
     return;
   }
-  
+
   window.location.href = 'waiting.html';
 });

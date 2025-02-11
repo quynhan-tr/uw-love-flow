@@ -108,7 +108,7 @@ def result():
     # Check if the user exists
     user = User.query.filter_by(discord_handle=discord_handle).first()
     if not user:
-        return render_template('pre_result.html', error="Discord handle not found. Please re-enter your Discord handle. If you just joined this round, please wait for the next round.", matches_exist=True)
+        return render_template('pre_result.html', error="Discord handle not found. Please re-enter your Discord handle.", matches_exist=True)
 
     # Get the match result for the user
     match_result = MatchResult.query.filter_by(user1_id=user.id).first()
