@@ -47,13 +47,7 @@ def friendship_quiz():
         # Add other fields as necessary
 
         if not name or not discord_handle or not mbti:
-            return jsonify({"error": "All fields are required"}), 400
-
-        # Check if the Discord handle already exists
-        existing_user = User.query.filter_by(discord_handle=discord_handle).first()
-        if existing_user:
-            logging.info(f"Discord handle '{discord_handle}' already exists.")
-            return jsonify({"error": "Discord handle already exists."}), 409
+            return "All fields are required", 400
 
         try:
             # Create a new User object
@@ -75,12 +69,11 @@ def friendship_quiz():
             # Add the user to the database session
             db.session.add(user)
             db.session.commit()
-            logging.info(f"User '{discord_handle}' added successfully.")
         except Exception as e:
             logging.error("Error adding user to database: %s", e)
-            return jsonify({"error": "An error occurred"}), 500
+            return "An error occurred", 500
 
-        return jsonify({"success": True}), 200
+        return redirect(url_for('waiting'))
     return render_template('friendship-quiz.html')
 
 @app.route('/waiting')
@@ -115,7 +108,7 @@ def result():
     # Check if the user exists
     user = User.query.filter_by(discord_handle=discord_handle).first()
     if not user:
-        return render_template('pre_result.html', error="Discord handle not found. Please re-enter your Discord handle. If you just joined this round, please wait for the next release.", matches_exist=True)
+        return render_template('pre_result.html', error="Discord handle not found. Please re-enter your Discord handle. If you just joined this round, please wait for the next round.", matches_exist=True)
 
     # Get the match result for the user
     match_result = MatchResult.query.filter_by(user1_id=user.id).first()
