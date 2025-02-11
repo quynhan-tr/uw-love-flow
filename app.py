@@ -132,14 +132,16 @@ def get_all_names():
 def get_gender_ratio():
     total_users = User.query.count()
     if total_users == 0:
-        return {"Male": 0, "Female": 0}
+        return {"Male": 0, "Female": 0, "Other": 0}
     
     male_count = User.query.filter_by(gender="Male").count()
     female_count = User.query.filter_by(gender="Female").count()
-
+    other_count = User.query.filter_by(gender="Other").count()
+    
     return {
-        "Male": round((male_count/total_users) * 100, 1),
-        "Female": round((female_count/total_users) * 100, 1)
+        "Male": round((male_count / total_users) * 100, 1),
+        "Female": round((female_count / total_users) * 100, 1),
+        "Other": round((other_count / total_users) * 100, 1)
     }
 
 @app.route('/run-cook')
