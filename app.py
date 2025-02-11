@@ -122,6 +122,7 @@ def result():
                            match_name=matched_user.name if matched_user else None,
                            match_discord=matched_user.discord_handle if matched_user else None,
                            match_message=matched_user.message if matched_user else None,
+                           gender_ratio=session.get('gender_ratio', {}),
                            names=get_all_names())
 
 def get_all_names():

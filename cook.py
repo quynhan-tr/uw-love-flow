@@ -254,16 +254,6 @@ def join():
             return "An error occurred", 500
     return render_template('join.html')
 
-@app.route('/result')
-def result():
-    # ... existing result route code ...
-    gender_ratio = get_gender_ratio()
-    return render_template('result.html', 
-                         match_name=match_name, 
-                         match_discord=match_discord,
-                         match_message=match_message,
-                         gender_ratio=gender_ratio)
-
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
