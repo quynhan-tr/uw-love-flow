@@ -113,7 +113,7 @@ def result():
     # Get the match result for the user
     match_result = MatchResult.query.filter_by(user1_id=user.id).first()
     if not match_result:
-        return render_template('result.html', match_name=False, names=get_all_names())
+        return render_template('result.html', match_name=None, names=get_all_names(), gender_ratio=get_gender_ratio())
 
     # Get the matched user's details
     matched_user = User.query.get(match_result.user2_id) if match_result.user2_id else None
