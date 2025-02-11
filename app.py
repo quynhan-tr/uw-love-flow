@@ -122,12 +122,25 @@ def result():
                            match_name=matched_user.name if matched_user else None,
                            match_discord=matched_user.discord_handle if matched_user else None,
                            match_message=matched_user.message if matched_user else None,
-                           gender_ratio=session.get('gender_ratio', {}),
+                           gender_ratio=get_gender_ratio(), 
                            names=get_all_names())
 
 def get_all_names():
     # Get all user names for the floating animation
     return [user.name for user in User.query.all()]
+
+def get_gender_ratio():
+    total_users = User.query.count()
+    if total_users == 0:
+        return {"Male": 0, "Female": 0}
+    
+    male_count = User.query.filter_by(gender="Male").count()
+    female_count = User.query.filter_by(gender="Female").count()
+
+    return {
+        "Male": round((male_count/total_users) * 100, 1),
+        "Female": round((female_count/total_users) * 100, 1)
+    }
 
 @app.route('/run-cook')
 def run_cook():
