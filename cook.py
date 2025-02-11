@@ -7,6 +7,7 @@ from scipy.optimize import linear_sum_assignment
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 import numpy as np
+from itertools import combinations
 
 app = Flask(__name__)
 
@@ -40,15 +41,16 @@ def calculate_mbti_compatibility(mbti1, mbti2):
     
     return compatibility_score
 
-def calculate_compatibility(user1, user2): 
+def calculate_compatibility(user1, user2, ignore_gender=False):
     score = 0
 
     # Question 1: MBTI
     score += calculate_mbti_compatibility(user1.mbti, user2.mbti)
 
     # Question 2 & 3: Gender Preference
-    if user1.gender not in user2.preferred_gender or user2.gender not in user1.preferred_gender:
-        return 0
+    if not ignore_gender:
+        if user1.gender not in user2.preferred_gender or user2.gender not in user1.preferred_gender:
+            return 0
 
     # Question 4: Conversationalist or Listener
     if user1.communication_style != user2.communication_style:
@@ -132,27 +134,22 @@ def calculate_compatibility(user1, user2):
 
     return score
 
-def calculate_all_compatibilities():
-    users = User.query.all()
+def calculate_all_compatibilities(users, ignore_gender=False):
     all_compatibilities = {}
 
     for user1 in users:
         user_scores = {}
         for user2 in users:
             if user1.id != user2.id:
-                score = calculate_compatibility(user1, user2)
+                score = calculate_compatibility(user1, user2, ignore_gender)
                 user_scores[user2.id] = score
         all_compatibilities[user1.id] = user_scores
 
     return all_compatibilities
 
-def find_best_matches(all_compatibilities):
-    # Convert the compatibility dictionary to a matrix
-    user_ids = list(all_compatibilities.keys())
-    n = len(user_ids)
-
+def find_best_matches(users):
     # Add a dummy user if the number of users is odd
-    if n % 2 != 0:
+    if len(users) % 2 != 0:
         dummy_user = User(
             name="dummy",
             discord_handle="dummy",
@@ -168,47 +165,64 @@ def find_best_matches(all_compatibilities):
             fate_belief="Depends",
             message="This is a dummy user for balancing."
         )
-        db.session.add(dummy_user)
-        db.session.commit()
-        user_ids.append(dummy_user.id)
-        n += 1
+        users.append(dummy_user)
 
+    # Round 1: Consider gender preferences
+    compatibilities = calculate_all_compatibilities(users)
+    matches = apply_hungarian_algorithm(compatibilities)
+
+    # Identify unmatched users
+    matched_users = set(matches.keys()).union(set(matches.values()))
+    unmatched_users = [user for user in users if user.id not in matched_users]
+
+    # Round 2: Ignore gender preferences for unmatched users
+    if unmatched_users:
+        unmatched_compatibilities = calculate_all_compatibilities(unmatched_users, ignore_gender=True)
+        unmatched_matches = apply_hungarian_algorithm(unmatched_compatibilities)
+        matches.update(unmatched_matches)
+
+    # Remove dummy user from matches
+    matches = {k: v for k, v in matches.items() if k != dummy_user.id and v != dummy_user.id}
+
+    return matches
+
+def apply_hungarian_algorithm(compatibilities):
+    user_ids = list(compatibilities.keys())
+    n = len(user_ids)
+
+    # Create a cost matrix for the Hungarian algorithm
     cost_matrix = np.zeros((n, n))
-
     for i, user1 in enumerate(user_ids):
         for j, user2 in enumerate(user_ids):
             if user1 != user2:
                 # Use negative scores because the algorithm finds the minimum cost
-                cost_matrix[i, j] = -all_compatibilities.get(user1, {}).get(user2, 0)
+                cost_matrix[i, j] = -compatibilities[user1].get(user2, 0)
 
     # Apply the Hungarian Algorithm
     row_ind, col_ind = linear_sum_assignment(cost_matrix)
 
     # Create matches based on the assignment
-    matches = []
+    matches = {}
     for i, j in zip(row_ind, col_ind):
         if i != j:  # Ensure no self-matching
             user1_id = user_ids[i]
             user2_id = user_ids[j]
-            score = -cost_matrix[i, j]  # Convert back to positive score
-            user1 = User.query.get(user1_id)
-            user2 = User.query.get(user2_id)
-            message = user1.message if user1 else "No message"
-            matches.append((user1_id, user2_id, score, message))
+            matches[user1_id] = user2_id
 
     return matches
 
 def main():
+    users = User.query.all()
+
     # Clear previous match results
     MatchResult.query.delete()
 
-    # Calculate compatibilities and find matches
-    compatibilities = calculate_all_compatibilities()
-    matches = find_best_matches(compatibilities)
+    # Find matches
+    matches = find_best_matches(users)
 
     # Store matches in the database
-    for user1_id, user2_id, score, message in matches:
-        match_result = MatchResult(user1_id=user1_id, user2_id=user2_id, score=score, message=message)
+    for user1_id, user2_id in matches.items():
+        match_result = MatchResult(user1_id=user1_id, user2_id=user2_id, score=0, message="")
         db.session.add(match_result)
     db.session.commit()
 
