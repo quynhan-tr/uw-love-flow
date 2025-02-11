@@ -1,7 +1,5 @@
 # uw love flow ~
 
-![Project Logo](static/Logo.png)
-
 ## Table of Contents
 
 - [About](#about)
