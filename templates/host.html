@@ -18,52 +18,24 @@
       align-items: center;
     }
 
-    .box {
-      text-align: center;
-      background: #FFCFEF;
-      padding: 20px;
-      border-radius: 10px;
-      border: 3px solid #7E3064;
-      width: 90%;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    .button {
-      margin: 15px 0;
-      padding: 15px 20px;
-      background-color: #7E3064;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-family: 'Rubik', sans-serif;
-      width: 100%;
-      max-width: 300px;
-    }
-
-    .logo {
-      display: block;
-      margin: 30px auto;
-      width: 80%;
-      max-width: 200px;
-    }
   </style>
 </head>
 <body class="host">
-    <img src="../static/Logo.png" alt="Logo" class="logo" onclick="window.location.href='/main'">
+    <img src="../static/Logo.png" alt="Logo" class="logo" onclick="window.location.href='/main'" style="margin-top: 150px;">
 
-    <div class="box" id="password-section">
-      <h2 style="color: #7E3064; font-family: 'Rubik', sans-serif; margin: 5px;">Enter Password</h2>
-      <input type="password" id="password" style="width: 80%; padding: 10px; margin: 10px 20px 20px 20px; border-radius: 5px; border: 2px solid #7E3064; font-family: 'Rubik', sans-serif; font-size: 18px;">
-      <button class="button" onclick="checkPassword()">Continue as host</button>
-    </div>
+    <div style="position: relative; height: 80vh;">
+      <div id="password-section" class="box">
+        <h2 style="color: #7E3064; font-family: 'Rubik', sans-serif; margin: 5px;">Enter Password</h2>
+        <input type="password" id="password" style="width: 80%; padding: 10px; margin: 10px 20px 20px 20px; border-radius: 5px; border: 2px solid #7E3064; font-family: 'Rubik', sans-serif; font-size: 18px;">
+        <button class="button" onclick="checkPassword()">Continue as host</button>
+      </div>
 
-    <div id="admin-buttons" class="hidden">
-      <div class="button-container">
-          <button class="button" onclick="executeAction('/run-cook')">Cook</button>
-          <button class="button" onclick="executeAction('/delete-results')">Delete Results</button>
-          <button class="button" onclick="executeAction('/delete-for-real')">Delete All</button>
+      <div id="admin-buttons" class="hidden">
+        <div class="button-container" style="position: absolute; top: calc(50% - 0px); left: 50%; transform: translate(-50%, -50%); text-align: center;">
+            <button class="button" style="width: 300px; margin-bottom: 15px;" onclick="executeAction('/run-cook')">Cook</button>
+            <button class="button" style="width: 300px; margin-bottom: 15px;" onclick="executeAction('/delete-results')">Delete Results</button>
+            <button class="button" style="width: 300px;" onclick="executeAction('/delete-for-real')">Delete All</button>
+        </div>
       </div>
     </div>
 
