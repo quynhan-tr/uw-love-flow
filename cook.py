@@ -147,6 +147,8 @@ def calculate_all_compatibilities(users, include_gender=True):
     return all_compatibilities
 
 def find_best_matches(users):
+    dummy_user = None  # Initialize dummy_user to None
+
     # Add a dummy user if the number of users is odd
     if len(users) % 2 != 0:
         dummy_user = User(
@@ -180,8 +182,9 @@ def find_best_matches(users):
         unmatched_matches = apply_hungarian_algorithm(unmatched_compatibilities)
         matches.update(unmatched_matches)
 
-    # Remove dummy user from matches
-    matches = {k: v for k, v in matches.items() if k != dummy_user.id and v != dummy_user.id}
+    # Remove dummy user from matches if it exists
+    if dummy_user:
+        matches = {k: v for k, v in matches.items() if k != dummy_user.id and v != dummy_user.id}
 
     return matches
 
