@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Host Options</title>
+  <link rel="stylesheet" href="../static/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+</head>
+<body class="host">
+    <img src="../static/Logo.png" alt="Logo" class="logo" onclick="window.location.href='/main'" style="margin-top: 150px;">
+      <div id="admin-buttons" class="box">
+        <div class="box" style="position: absolute; top: calc(50% - 0px); left: 50%; transform: translate(-50%, -50%); text-align: center;">
+            <button class="button" style="width: 300px; margin-bottom: 15px;" onclick="executeAction('/run-cook')">Cook</button>
+            <button class="button" style="width: 300px; margin-bottom: 15px;" onclick="executeAction('/delete-results')">Delete Results</button>
+            <button class="button" style="width: 300px;" onclick="executeAction('/delete-for-real')">Delete All</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../static/host.js"></script>
+</body>
+</html>

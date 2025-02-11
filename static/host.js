@@ -4,8 +4,7 @@ function checkPassword() {
     .then(response => response.json())
     .then(data => {
       if (password === data.password) {
-        document.getElementById('admin-buttons').classList.remove('box_hidden');
-        document.getElementById('password-section').classList.add('hidden');
+        window.location.href = '/host-options';
       } else {
         alert("Incorrect password. Please try again.");
       }

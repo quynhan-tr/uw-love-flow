@@ -156,5 +156,9 @@ def delete_for_real():
 def get_password():
     return jsonify(password=os.getenv('ADMIN_PASSWORD'))
 
+@app.route('/host-options')
+def host_options():
+    return render_template('host-options.html')
+
 if __name__ == '__main__':
     app.run(debug=True)

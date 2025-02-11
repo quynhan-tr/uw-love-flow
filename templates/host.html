@@ -6,32 +6,6 @@
   <title>Host</title>
   <link rel="stylesheet" href="../static/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
-  <style>
-    .box_hidden {
-      width: 90%;
-      max-width: 700px;
-      height: auto;
-      border-radius: 10px;
-      border: 3px solid #7E3064;
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      padding: 20px;
-      margin: -100px auto 0;
-    }
-    .hidden {
-      display: none;
-    }
-    .button-container {
-      display: flex;
-      flex-direction: column; /* Arrange buttons vertically */
-      justify-content: center;
-      align-items: center;
-    }
-
-  </style>
 </head>
 <body class="host">
     <img src="../static/Logo.png" alt="Logo" class="logo" onclick="window.location.href='/main'" style="margin-top: 150px;">
@@ -42,15 +16,6 @@
         <input type="password" id="password" style="width: 80%; padding: 10px; margin: 10px 20px 20px 20px; border-radius: 5px; border: 2px solid #7E3064; font-family: 'Rubik', sans-serif; font-size: 18px;">
         <button class="button" onclick="checkPassword()">Continue as host</button>
       </div>
-
-      <div id="admin-buttons" class="box_hidden">
-        <div class="button-container" style="position: absolute; top: calc(50% - 0px); left: 50%; transform: translate(-50%, -50%); text-align: center;">
-            <button class="button" style="width: 300px; margin-bottom: 15px;" onclick="executeAction('/run-cook')">Cook</button>
-            <button class="button" style="width: 300px; margin-bottom: 15px;" onclick="executeAction('/delete-results')">Delete Results</button>
-            <button class="button" style="width: 300px;" onclick="executeAction('/delete-for-real')">Delete All</button>
-        </div>
-      </div>
-    </div>
 
     <script src="../static/host.js"></script>
 </body>
