@@ -7,7 +7,6 @@ from scipy.optimize import linear_sum_assignment
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 import numpy as np
-from itertools import combinations
 
 app = Flask(__name__)
 
@@ -41,14 +40,14 @@ def calculate_mbti_compatibility(mbti1, mbti2):
     
     return compatibility_score
 
-def calculate_compatibility(user1, user2, ignore_gender=False):
+def calculate_compatibility(user1, user2, include_gender=True): 
     score = 0
 
     # Question 1: MBTI
     score += calculate_mbti_compatibility(user1.mbti, user2.mbti)
 
     # Question 2 & 3: Gender Preference
-    if not ignore_gender:
+    if include_gender:
         if user1.gender not in user2.preferred_gender or user2.gender not in user1.preferred_gender:
             return 0
 
@@ -134,14 +133,14 @@ def calculate_compatibility(user1, user2, ignore_gender=False):
 
     return score
 
-def calculate_all_compatibilities(users, ignore_gender=False):
+def calculate_all_compatibilities(users, include_gender=True):
     all_compatibilities = {}
 
     for user1 in users:
         user_scores = {}
         for user2 in users:
             if user1.id != user2.id:
-                score = calculate_compatibility(user1, user2, ignore_gender)
+                score = calculate_compatibility(user1, user2, include_gender)
                 user_scores[user2.id] = score
         all_compatibilities[user1.id] = user_scores
 
@@ -168,7 +167,7 @@ def find_best_matches(users):
         users.append(dummy_user)
 
     # Round 1: Consider gender preferences
-    compatibilities = calculate_all_compatibilities(users)
+    compatibilities = calculate_all_compatibilities(users, include_gender=True)
     matches = apply_hungarian_algorithm(compatibilities)
 
     # Identify unmatched users
@@ -177,7 +176,7 @@ def find_best_matches(users):
 
     # Round 2: Ignore gender preferences for unmatched users
     if unmatched_users:
-        unmatched_compatibilities = calculate_all_compatibilities(unmatched_users, ignore_gender=True)
+        unmatched_compatibilities = calculate_all_compatibilities(unmatched_users, include_gender=False)
         unmatched_matches = apply_hungarian_algorithm(unmatched_compatibilities)
         matches.update(unmatched_matches)
 
