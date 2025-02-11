@@ -20,6 +20,23 @@ document.getElementById('friendship-quiz-form').addEventListener('submit', funct
     event.preventDefault();
     return;
   }
+  event.preventDefault(); // Prevent the default form submission
 
-  window.location.href = 'waiting.html';
+  const formData = new FormData(this);
+
+  fetch('/friendship-quiz', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.error) {
+      alert(data.error); // Show alert if there's an error
+    } else {
+      window.location.href = 'waiting.html'; // Redirect if successful
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
 });

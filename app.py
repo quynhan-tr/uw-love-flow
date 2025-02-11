@@ -52,7 +52,7 @@ def friendship_quiz():
         # Check if the Discord handle already exists
         existing_user = User.query.filter_by(discord_handle=discord_handle).first()
         if existing_user:
-            return render_template('friendship-quiz.html', error="Discord handle already exists.")
+            return jsonify({"error": "Discord handle already exists."}), 409
 
         try:
             # Create a new User object
