@@ -212,6 +212,19 @@ def main():
         db.session.add(match_result)
     db.session.commit()
 
+def get_gender_ratio():
+    total_users = User.query.count()
+    if total_users == 0:
+        return {"Male": 0, "Female": 0}
+    
+    male_count = User.query.filter_by(gender="Male").count()
+    female_count = User.query.filter_by(gender="Female").count()
+    
+    return {
+        "Male": round((male_count/total_users) * 100, 1),
+        "Female": round((female_count/total_users) * 100, 1)
+    }
+
 @app.route('/join', methods=['GET', 'POST'])
 def join():
     if request.method == 'POST':
@@ -232,11 +245,24 @@ def join():
             )
             db.session.add(user)
             db.session.commit()
+            
+            # Add gender ratio to session
+            session['gender_ratio'] = get_gender_ratio()
             return redirect(url_for('waiting'))
         except Exception as e:
             logging.error("Error adding user: %s", e)
             return "An error occurred", 500
     return render_template('join.html')
+
+@app.route('/result')
+def result():
+    # ... existing result route code ...
+    gender_ratio = get_gender_ratio()
+    return render_template('result.html', 
+                         match_name=match_name, 
+                         match_discord=match_discord,
+                         match_message=match_message,
+                         gender_ratio=gender_ratio)
 
 if __name__ == "__main__":
     with app.app_context():

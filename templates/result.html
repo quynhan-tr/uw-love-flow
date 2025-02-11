@@ -6,57 +6,113 @@
   <title>Match Result</title>
   <link rel="stylesheet" href="../static/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
-  <style>
-    .floating-name {
-      position: fixed;
-      color: #e699c9;
-      font-family: 'Rubik', sans-serif;
-      font-size: 32px;
-      font-weight: bold;
-      animation: float 20s linear infinite;
-      opacity: 0.7;
-      z-index: 1;
-    }
-    @keyframes float {
-      0% { transform: translate(0, 0); }
-      25% { transform: translate(100px, 100px); }
-      50% { transform: translate(0, 200px); }
-      75% { transform: translate(-100px, 100px); }
-      100% { transform: translate(0, 0); }
-    }
-    .hidden {
-      display: none;
-    }
-    .button {
-      margin: 10px;
-      padding: 10px 20px;
-      background-color: #7E3064;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-family: 'Rubik', sans-serif;
-    }
-  </style>
 </head>
 <body class="main">
     <img src="../static/Logo.png" alt="Logo" class="join-logo" onclick="window.location.href='/main'" style="margin-top: 150px;">
+    <style>
+      .floating-name {
+        position: fixed;
+        color: #e699c9;
+        font-family: 'Rubik', sans-serif;
+        font-size: 32px;
+        font-weight: bold;
+        animation: float 20s linear infinite;
+        opacity: 0.7;
+        z-index: 1;
+      }
+      @keyframes float {
+        0% { transform: translate(0, 0); }
+        25% { transform: translate(100px, 100px); }
+        50% { transform: translate(0, 200px); }
+        75% { transform: translate(-100px, 100px); }
+        100% { transform: translate(0, 0); }
+      }
+
+    </style>
 
     <div style="position: relative; height: 80vh;">
       <div style="position: absolute; top: calc(50% - 150px); left: 50%; transform: translate(-50%, -50%); text-align: center; 
                   background: #FFCFEF; padding: 10px; border-radius: 10px; border: 2px solid #7E3064; width: 500px;">
-        <h2 style="color: #7E3064; font-family: 'Rubik', sans-serif; margin: 5px;">Enter Password</h2>
-        <input type="password" id="password" style="width: 80%; padding: 10px; margin: 10px 20px 20px 20px; border-radius: 5px; border: 2px solid #7E3064; font-family: 'Rubik', sans-serif; font-size: 18px;">
-        <button class="button" onclick="checkPassword()">Submit</button>
-        
-        <div id="admin-buttons" class="hidden">
-          <button class="button" onclick="window.location.href='/run-cook'">Cook</button>
-          <button class="button" onclick="window.location.href='/delete-results'">Delete Results</button>
-          <button class="button" onclick="window.location.href='/delete-for-real'">Delete All</button>
-        </div>
+        <h2 style="color: #7E3064; font-family: 'Rubik', sans-serif; margin: 5px;">Your Match Results</h2>
+        <p style="color: #7E3064; font-family: 'Rubik', sans-serif; font-size: 22px; margin: 10px; font-weight: bold;">
+          {% if match_name and match_name != "dummy" %}
+          <p>You have been matched with {{ match_name }}.</p>
+          <p>Discord Handle: {{ match_discord }}</p>
+          {% if match_message %}
+              <p style="color: #ac5890;">Message: "{{ match_message }}"</p>
+          {% endif %}
+          {% else %}
+          <p>"Sorry we can't find your match today. But come up to us and get a free nice and huggy teddy"</p>
+          {% endif %}
+          
+          <div style="margin-top: 20px; padding-top: 10px; border-top: 1px solid #7E3064;">
+              <p style="font-size: 16px; color: #7E3064;">Current Gender Distribution:</p>
+              <p style="font-size: 14px; color: #ac5890;">
+                  Male: {{ gender_ratio['Male'] }}% | Female: {{ gender_ratio['Female'] }}%
+              </p>
+              <p style="font-size: 12px; font-style: italic; color: #ac5890; margin-top: 10px;">
+                  Note: If we couldn't accommodate your gender preference, this might be due to the current gender distribution of participants.
+              </p>
+          </div>
+        </p>
       </div>
     </div>
+    <script>
+      function showMatch(event) {
+        event.preventDefault();
+        document.getElementById('matchResult').style.display = 'block';
+      }
+    </script>
 
-    <script src="../static/result.js"></script>
+    <script>
+      // Add floating names animation with varied starting positions and directions
+      const names = JSON.parse('{{ names|tojson|safe }}').filter(name => name !== 'dummy');
+      const container = document.querySelector('div[style*="height: 80vh"]');
+      
+      const startPositions = [
+        {left: '10%', top: '10%'},
+        {left: '80%', top: '20%'},
+        {left: '30%', top: '70%'},
+        {left: '70%', top: '60%'},
+        {left: '20%', top: '40%'},
+        {left: '60%', top: '15%'},
+        {left: '40%', top: '80%'},
+        {left: '90%', top: '50%'}
+      ];
+      
+      names.forEach((name, index) => {
+        const nameElement = document.createElement('div');
+        nameElement.className = 'floating-name';
+        nameElement.textContent = name;
+        nameElement.style.left = startPositions[index].left;
+        nameElement.style.top = startPositions[index].top;
+        
+        // Generate random movement pattern
+        const randomAngle = Math.random() * 360;
+        const randomDistance = 50 + Math.random() * 150;
+        const dx = Math.cos(randomAngle * Math.PI / 180) * randomDistance;
+        const dy = Math.sin(randomAngle * Math.PI / 180) * randomDistance;
+        
+        // Apply custom animation with longer duration (25-35s instead of 15-25s)
+        nameElement.style.animation = `float-${index} ${25 + Math.random() * 10}s infinite ease-in-out`;
+        
+        // Create keyframe animation
+        const keyframes = `
+          @keyframes float-${index} {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(${dx}px, ${dy}px); }
+            50% { transform: translate(${-dy}px, ${dx}px); }
+            75% { transform: translate(${-dx}px, ${-dy}px); }
+          }
+        `;
+        
+        // Add keyframes to document
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = keyframes;
+        document.head.appendChild(styleSheet);
+        
+        container.appendChild(nameElement);
+      });
+    </script>
 </body>
 </html>
