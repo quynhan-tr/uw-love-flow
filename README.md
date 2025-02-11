@@ -13,7 +13,7 @@
 
 ## About
 
-**uw love flow** is a web application designed to facilitate a unique speed dating experience using personality and preference matching. It leverages the Flask framework and a custom matching algorithm to pair participants based on their responses to a series of questions.
+**uw love flow** is a web application designed to facilitate a unique speed dating experience using personality and preference matching. 
 
 ## Features
 
@@ -29,8 +29,8 @@ To get a local copy up and running, follow these steps:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/project-name.git
-   cd project-name
+   git clone https://github.com/quynnh-an/uw-love-flow.git
+   cd uw-love-flow
    ```
 
 2. **Set up a virtual environment:**
