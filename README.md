@@ -1,6 +1,6 @@
 # uw love flow ~
 
-![Project Logo](path/to/logo.png)
+![Project Logo](static/Logo.png)
 
 ## Table of Contents
 
