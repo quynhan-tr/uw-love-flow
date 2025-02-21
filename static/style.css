@@ -159,16 +159,6 @@ p.head-text{
   text-align: center; 
 }
 
-p.title-text{
-  color: #7E3064; 
-  margin: 0 auto; 
-  font-family: 'Rubik', sans-serif; 
-  font-size: 20px; 
-  width: 90%; 
-  text-align: center; 
-  margin-bottom: 10px;
-}
-
 p.body-text{
   color: #7E3064; 
   margin: 0 auto; 
@@ -176,7 +166,7 @@ p.body-text{
   font-size: 18px; 
   width: 90%; 
   text-align: center; 
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 /* Responsive adjustments */
@@ -193,12 +183,8 @@ p.body-text{
     max-height: 120px;
   }
 
-  p.title-text{
-    font-size: 18px; 
-  }
-
   p.body-text{
-    font-size: 12px;
+    font-size: 18px;
   }
 }
 
@@ -218,11 +204,8 @@ p.body-text{
   p.head-text{
     font-size: 22px;
   }
-  p.title-text{
-    font-size: 16px; 
-  }
 
   p.body-text{
-    font-size: 14px;
+    font-size: 16px;
   }
 }
