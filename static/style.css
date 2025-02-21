@@ -153,35 +153,13 @@ body.quiz {
   .box, .quiz-box {
     width: 95%;
     padding: 15px;
-    font-size: 18px;
+    font-size: 16px;
   }
   .button {
-    font-size: 18px;
+    font-size: 16px;
   }
   .logo, .join-logo, .quiz-logo {
     max-height: 120px;
-  }
-
-  p.title-text{
-    font-size: 18px; 
-  }
-
-  p.body-text{
-    font-size: 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  .box, .quiz-box {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-  }
-  .button {
-    font-size: 16px;
-  }
-  .logo, .join-logo, .quiz-logo {
-    max-height: 100px;
   }
 
   p.title-text{
@@ -190,5 +168,27 @@ body.quiz {
 
   p.body-text{
     font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .box, .quiz-box {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+  }
+  .button {
+    font-size: 14px;
+  }
+  .logo, .join-logo, .quiz-logo {
+    max-height: 100px;
+  }
+
+  p.title-text{
+    font-size: 14px; 
+  }
+
+  p.body-text{
+    font-size: 12px;
   }
 }
