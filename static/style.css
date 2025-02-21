@@ -16,6 +16,7 @@ body.main, body.host, body.join {
   height: auto;
   margin: 0 auto 15px auto;
   cursor: pointer;
+  display: block;
 }
 
 .box {
