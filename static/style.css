@@ -32,6 +32,7 @@ body.main, body.host, body.join {
   gap: 20px;
   padding: 20px;
   margin: 0 auto;
+  font-size: 18px;
 }
 
 .input-field {
@@ -146,6 +147,26 @@ body.quiz {
 .quiz-box label {
   display: block;
   margin-bottom: 5px;
+}
+
+p.title-text{
+  color: #7E3064; 
+  margin: 0 auto; 
+  font-family: 'Rubik', sans-serif; 
+  font-size: 18px; 
+  width: 90%; 
+  text-align: center; 
+  margin-bottom: 20px;
+}
+
+p.body-text{
+  color: #7E3064; 
+  margin: 0 auto; 
+  font-family: 'Rubik', sans-serif; 
+  font-size: 16px; 
+  width: 90%; 
+  text-align: center; 
+  margin-bottom: 15px;
 }
 
 /* Responsive adjustments */
