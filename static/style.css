@@ -149,6 +149,17 @@ body.quiz {
   margin-bottom: 5px;
 }
 
+p.head-text{
+  color: #7E3064; 
+  margin: 0 auto; 
+  font-style: strong;
+  font-family: 'Rubik', sans-serif; 
+  font-size: 20px; 
+  width: 90%; 
+  text-align: center; 
+  margin-bottom: 20px;
+}
+
 p.title-text{
   color: #7E3064; 
   margin: 0 auto; 
@@ -174,21 +185,21 @@ p.body-text{
   .box, .quiz-box {
     width: 95%;
     padding: 15px;
-    font-size: 16px;
+    font-size: 18px;
   }
   .button {
-    font-size: 16px;
+    font-size: 18px;
   }
   .logo, .join-logo, .quiz-logo {
     max-height: 120px;
   }
 
   p.title-text{
-    font-size: 16px; 
+    font-size: 18px; 
   }
 
   p.body-text{
-    font-size: 14px;
+    font-size: 12px;
   }
 }
 
@@ -196,20 +207,23 @@ p.body-text{
   .box, .quiz-box {
     width: 100%;
     padding: 10px;
-    font-size: 14px;
+    font-size: 16px;
   }
   .button {
-    font-size: 14px;
+    font-size: 16px;
   }
   .logo, .join-logo, .quiz-logo {
     max-height: 100px;
   }
 
+  p.head-text{
+    font-size: 18px;
+  }
   p.title-text{
-    font-size: 14px; 
+    font-size: 16px; 
   }
 
   p.body-text{
-    font-size: 12px;
+    font-size: 14px;
   }
 }
