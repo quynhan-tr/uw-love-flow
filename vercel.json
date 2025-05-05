@@ -1,7 +1,13 @@
 {
   "version": 2,
+  "builds": [
+    { "src": "client/**/*", "use": "@vercel/static" }
+  ],
   "routes": [
     { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/client/index.html" }
+    { "src": "/css/(.*)",    "dest": "/client/css/$1" },
+    { "src": "/js/(.*)",     "dest": "/client/js/$1" },
+    { "src": "/assets/(.*)", "dest": "/client/assets/$1" },
+    { "src": "/(.*\\.html)","dest": "/client/$1" }
   ]
 }
