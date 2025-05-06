@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template, redirect, url_for, jsonify, session
 import json
 import os
-from models import db, User, MatchResult 
+from .models import db, User, MatchResult 
 import logging
 from scipy.optimize import linear_sum_assignment
 from sqlalchemy.orm import sessionmaker

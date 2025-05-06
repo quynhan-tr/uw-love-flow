@@ -1,8 +1,8 @@
 from flask import Flask, request, render_template, redirect, url_for, jsonify, session
 import json
 import os
-from api.models import db, User, MatchResult  # Import from models.py
-from api.cook import main as run_cook_logic  # Import the main function from cook.py
+from .models import db, User, MatchResult  # Import from models.py
+from .cook import main as run_cook_logic  # Import the main function from cook.py
 import logging
 from dotenv import load_dotenv  # Import the load_dotenv function
 
