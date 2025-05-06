@@ -1,8 +1,8 @@
 from flask import Flask, request, render_template, redirect, url_for, jsonify, session
 import json
 import os
-from models import db, User, MatchResult  # Import from models.py
-from cook import main as run_cook_logic  # Import the main function from cook.py
+from api.models import db, User, MatchResult  # Import from models.py
+from api.cook import main as run_cook_logic  # Import the main function from cook.py
 import logging
 from dotenv import load_dotenv  # Import the load_dotenv function
 
@@ -12,13 +12,13 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "dev-secret")  # use env var for production
 
-# 1️⃣ Read the env var for your Postgres URL (Render sets `DATABASE_URL`)
-# 2️⃣ If it's not set (e.g. local), fall back to SQLite
+# Read the env var for your Postgres URL (Render sets `DATABASE_URL`)
+# If it's not set (e.g. local), fall back to SQLite
 postgres_url = os.getenv("DATABASE_URL") or os.getenv("SQLALCHEMY_DATABASE_URI")
 if not postgres_url:
     postgres_url = "sqlite:///local.db"
 
-# 3️⃣ Apply it in your config (remove any hardcoded URL)
+# Apply it in your config (remove any hardcoded URL)
 app.config["SQLALCHEMY_DATABASE_URI"] = postgres_url
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
