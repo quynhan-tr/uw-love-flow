@@ -89,10 +89,8 @@ def pre_result():
     matches_exist = MatchResult.query.first() is not None
     return render_template('pre_result.html', matches_exist=matches_exist)
 
-@app.route('/check_result')
 @app.route('/api/check_result')
 def check_result():
-    # Check if matches exist in the database
     matches_exist = MatchResult.query.first() is not None
     return jsonify(matches_exist=matches_exist)
 
