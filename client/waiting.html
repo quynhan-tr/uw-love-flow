@@ -13,7 +13,7 @@
         <p class = "head-text">
           We're finding your match<span class="loading-dots"></span></p>
         <div class="withtext-box" style="gap: 20px; display: flex; justify-content: center; width: 100%;">
-          <button class="button" onclick="window.location.href='/api/check_result'">Refresh</button>
+          <button id="refresh-btn" class="button">Refresh</button>
         </div>
         <p class = "body-text">
           Match will be released in approx 30 min~ While waiting, check out our activities:</p>
@@ -22,5 +22,28 @@
         <p class = "body-text">
           @MC Comfy: Mocktails, Karaoke/ Talent show (for chance to win boba date!), CupPong, PhotoBooth</p>
     </div>
+    <script>
+      document.getElementById('refresh-btn')
+        .addEventListener('click', () => {
+          fetch('/api/check_result')
+            .then(res => {
+              if (!res.ok) throw new Error(res.statusText);
+              return res.json();
+            })
+            .then(data => {
+              if (data.matches_exist) {
+                window.location.href = '/pre_result.html';
+              } else {
+                window.location.href = '/waiting.html';
+              }
+            })
+            .catch(err => {
+              console.error(err);
+              alert('Something went wrong. Please try again later.');
+            });
+        });
+    </script>
 </body>
 </html>
+
+

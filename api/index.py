@@ -93,9 +93,7 @@ def pre_result():
 def check_result():
     # Check if matches exist in the database
     matches_exist = MatchResult.query.first() is not None
-    if matches_exist:
-        return render_template('pre_result.html', matches_exist=matches_exist)
-    return render_template('waiting.html')
+    return jsonify(matches_exist=matches_exist)
 
 @app.route('/host')
 def host():
