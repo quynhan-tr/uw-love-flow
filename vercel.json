@@ -13,6 +13,11 @@
     },
     
     {
+      "src": "/(.*).javascript",
+      "dest": "client/js/$1.js"
+    },
+    
+    {
       "src": "/(.*)",
       "dest": "client/$1"
     }
