@@ -1,10 +1,10 @@
 function checkPassword() {
   const password = document.getElementById('password').value;
-  fetch('/get-password')
+  fetch('api/get-password')
     .then(response => response.json())
     .then(data => {
       if (password === data.password) {
-        window.location.href = '/host-options';
+        window.location.href = '/host-options.html';
       } else {
         alert("Incorrect password. Please try again.");
       }

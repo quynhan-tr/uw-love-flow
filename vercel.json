@@ -11,14 +11,8 @@
       "src": "/api/(.*)",
       "dest": "https://uw-love-flow.onrender.com"
     },
-    { "src": "^/host$",            "dest": "/client/host.html" },
-    { "src": "^/host-options$",            "dest": "/client/host.html" },
-    { "src": "^/index$",            "dest": "/client/host.html" },
-    { "src": "^/friendship-quiz$", "dest": "/client/friendship-quiz.html" },
-    { "src": "^/result$",            "dest": "/client/host.html" },
-    { "src": "^/pre-result$",            "dest": "/client/host.html" },
-    { "src": "^/pre_result$",            "dest": "/client/host.html" },
-
+    
+    { "src": "^/([^\\.]+)$",          "dest": "/client/$1.html" },
 
     {
       "src": "/(.*)",
