@@ -12,8 +12,6 @@
       "dest": "https://uw-love-flow.onrender.com"
     },
     
-    { "src": "^/([^\\.]+)$",          "dest": "/client/$1.html" },
-
     {
       "src": "/(.*)",
       "dest": "client/$1"
