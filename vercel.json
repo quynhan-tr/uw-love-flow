@@ -13,9 +13,9 @@
     },
     
     {
-      "src": "/(.*).javascript",
-      "dest": "client/js/$1.html"
-    },
+      "src": "^/([^\\.]+)\\.javascript$",
+      "dest": "/client/$1.html"
+    }
 
     {
       "src": "/(.*)",
