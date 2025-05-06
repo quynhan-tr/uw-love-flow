@@ -9,7 +9,7 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "https://uw-love-flow.onrender.com"
+      "dest": "https://uw-love-flow.onrender.com/$1"
     },
     
     {
