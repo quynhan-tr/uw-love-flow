@@ -8,6 +8,10 @@ function checkPassword() {
       } else {
         alert("Incorrect password. Please try again.");
       }
+    })
+    .catch(err => {
+      console.error('Error fetching password:', err);
+      alert('Something went wrong. Please try again later.');
     });
 }
 
