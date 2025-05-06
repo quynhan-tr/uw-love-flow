@@ -3,12 +3,17 @@
   "version": 2,
 
   "builds": [
-    { "src": "api/**/*.py",     "use": "@vercel/python" },
-    { "src": "client/**/*",     "use": "@vercel/static" }
+    { "src": "client/**/*", "use": "@vercel/static" }
   ],
-  
+
   "routes": [
-    { "src": "/api/(.*)", "dest": "api/$1.py" },
-    { "src": "/(.*)",      "dest": "client/$1"    }
+    {
+      "src": "/api/(.*)",
+      "dest": "https://uw-love-flow.onrender.com"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "client/$1"
+    }
   ]
 }
