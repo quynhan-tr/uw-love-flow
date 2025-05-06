@@ -21,5 +21,5 @@ document.getElementById('friendship-quiz-form').addEventListener('submit', funct
     return;
   }
 
-  window.location.href = '../waiting';
+  window.location.href = '/waiting';
 });
