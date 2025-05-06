@@ -1,4 +1,5 @@
 document.getElementById('friendship-quiz-form').addEventListener('submit', function(event) {
+  event.preventDefault();
   const genres = document.querySelectorAll('input[type="checkbox"][name="movie-genres"]:checked');
   const mbti = document.querySelector('input[name="mbti"]').value.toUpperCase();
   const validMBTIs = ['ISTJ', 'ISFJ', 'INFJ', 'INTJ', 'ISTP', 'ISFP', 'INFP', 'INTP', 'ESTP', 'ESFP', 'ENFP', 'ENTP', 'ESTJ', 'ESFJ', 'ENFJ', 'ENTJ'];
