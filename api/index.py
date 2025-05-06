@@ -6,19 +6,22 @@ from cook import main as run_cook_logic  # Import the main function from cook.py
 import logging
 from dotenv import load_dotenv  # Import the load_dotenv function
 
-# Load environment variables from .env file
+# Load .env in local/dev
 load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = 'uw_dsc_speed_dating' 
+app.secret_key = os.getenv("SECRET_KEY", "dev-secret")  # use env var for production
 
-# Get the absolute path to the project directory
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DATA_FILE = os.path.join(BASE_DIR, 'data.txt')
+# 1️⃣ Read the env var for your Postgres URL (Render sets `DATABASE_URL`)
+# 2️⃣ If it's not set (e.g. local), fall back to SQLite
+postgres_url = os.getenv("DATABASE_URL") or os.getenv("SQLALCHEMY_DATABASE_URI")
+if not postgres_url:
+    postgres_url = "sqlite:///local.db"
 
-# Configure the database
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///local.db')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# 3️⃣ Apply it in your config (remove any hardcoded URL)
+app.config["SQLALCHEMY_DATABASE_URI"] = postgres_url
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
 db.init_app(app)
 
 logging.basicConfig(level=logging.DEBUG)
