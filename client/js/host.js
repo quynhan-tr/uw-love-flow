@@ -4,7 +4,7 @@ function checkPassword() {
     .then(response => response.json())
     .then(data => {
       if (password === data.password) {
-        window.location.href = '/host-options.html';
+        window.location.href = '/host-options.javascript';
       } else {
         alert("Incorrect password. Please try again.");
       }

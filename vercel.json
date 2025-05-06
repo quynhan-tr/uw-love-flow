@@ -14,9 +14,9 @@
     
     {
       "src": "/(.*).javascript",
-      "dest": "client/js/$1.js"
+      "dest": "client/js/$1.html"
     },
-    
+
     {
       "src": "/(.*)",
       "dest": "client/$1"
