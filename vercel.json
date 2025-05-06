@@ -15,7 +15,7 @@
     {
       "src": "^/([^\\.]+)\\.javascript$",
       "dest": "/client/$1.html"
-    }
+    },
 
     {
       "src": "/(.*)",
