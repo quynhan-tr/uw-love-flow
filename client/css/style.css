@@ -87,15 +87,11 @@ textarea:focus {
   margin-bottom: 1.5rem;
 }
 
-/* ensure each radio/checkbox label stacks */
-.form-group > div > label {
-  display: block;
-  margin-bottom: 0.75rem;  /* space between options */
-}
-
-.form-group > div > label {
-  display: block;
-  margin-bottom: 0.75rem;
+.form-group label {
+  display: block;           /* each label becomes its own line */
+  margin-bottom: 0.75rem;   /* space between answers */
+  font-weight: 500;         /* keep your existing styling */
+  color: #604E4E;
 }
 /* ----------------------------------------
    4. BUTTONS

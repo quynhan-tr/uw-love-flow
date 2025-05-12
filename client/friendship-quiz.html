@@ -12,28 +12,28 @@
     <img src="/assets/Logo.png" alt="Logo" class="quiz-logo" onclick="window.location.href='/index.html'">
     <form id="friendship-quiz-form" method="POST" action="/friendship-quiz.html">
         <!-- Name and Discord Handle -->
-        <div>
+        <div class="form-group">
           <p>Your Name</p>
           <input type="text" name="name" required>
         </div>
-        <div>
+        <div class="form-group">
           <p>Discord Handle</p>
           <input type="text" name="discord" required>
         </div>
         <!-- Question 1 -->
-        <div>
+        <div class="form-group">
           <p>1. Your MBTI?</p>
           <input type="text" name="mbti" minlength="4" maxlength="4" required>
-        </div>
+        </div class="form-group">
         <!-- Question 2 -->
-        <div>
+        <div class="form-group">
           <p>2. Your gender:</p>
           <label><input type="radio" name="gender" value="Male" required> Male</label>
           <label><input type="radio" name="gender" value="Female" required> Female</label>
           <label><input type="radio" name="gender" value="Other" required> Other</label>
-        </div>
+        </div class="form-group">
         <!-- Question 3 -->
-        <div>
+        <div class="form-group">
           <p>3. What gender would you prefer to be matched with? (Select all that apply)</p>
           <label><input type="checkbox" name="preferred-gender" value="Male"> Male</label>
           <label><input type="checkbox" name="preferred-gender" value="Female"> Female</label>
@@ -41,14 +41,14 @@
         </div>
         
         <!-- Question 4 -->
-        <div>
+        <div class="form-group">
           <p>4. Are you a conversationalist or listener?</p>
           <label><input type="radio" name="communication-style" value="Conversationalist" required> Conversationalist</label>
           <label><input type="radio" name="communication-style" value="Listener" required> Listener</label>
         </div>
 
         <!-- Question 5 -->
-        <div>
+        <div class="form-group">
           <p>5. What type of activities do you enjoy most on a free weekend?</p>
           <label><input type="radio" name="weekend-activity" value="Active" required> Active <span style="font-size: 16px; color: #977A7A;">(sports, hiking, camping, etc.)</span></label>
           <label><input type="radio" name="weekend-activity" value="Chill" required> Chill <span style="font-size: 16px; color: #977A7A;;">(catch up on sleep, movie, study, painting, etc.)</span></label>
@@ -57,14 +57,14 @@
         </div>
 
         <!-- Question 6 -->
-        <div>
+        <div class="form-group">
           <p>6. Would you rather have more money or more freedom?</p>
           <label><input type="radio" name="preference" value="Money" required> Money</label>
           <label><input type="radio" name="preference" value="Freedom" required> Freedom</label>
         </div>
 
         <!-- Question 7 -->
-        <div>
+        <div class="form-group">
           <p>7. Select your top 3 movie genres</p>
           <label><input type="checkbox" name="movie-genres" value="Action/Adventure"> Action/Adventure</label>
           <label><input type="checkbox" name="movie-genres" value="Drama"> Drama</label>
@@ -75,7 +75,7 @@
         </div>
 
         <!-- Question 8 -->
-        <div>
+        <div class="form-group">
           <p>8. How often do you party?</p>
           <label><input type="radio" name="party-frequency" value="Usually" required> Usually</label>
           <label><input type="radio" name="party-frequency" value="Sometimes" required> Sometimes</label>
@@ -84,7 +84,7 @@
         </div>
 
         <!-- Question 9 -->
-        <div>
+        <div class="form-group">
           <p>9. What are the top 3 components to a good relationship?</p>
           <label><input type="checkbox" name="relationship-components" value="Trust"> Trust <span style="font-size: 16px; color: #977A7A;">(Placing trust in your partner and giving them the benefit of the doubt)</span></label>
           <label><input type="checkbox" name="relationship-components" value="Communication"> Communication <span style="font-size: 16px; color: #977A7A;">(Being able to share your perspective and have it value)</span></label>
@@ -97,7 +97,7 @@
         </div>
 
         <!-- Question 10 -->
-        <div>
+        <div class="form-group">
           <p>10. Do you believe in fate - something that is meant to be?</p>
           <label><input type="radio" name="fate" value="Yes" required> Yes</label>
           <label><input type="radio" name="fate" value="Depends" required> Hmm, depends</label>
@@ -105,7 +105,7 @@
         </div>
 
         <!-- New Question: Message to Your Match -->
-        <div>
+        <div class="form-group">
           <p>Message to your match (Optional)</p>
           <textarea name="message" rows="4" cols="50" placeholder="Write a message to your match..."></textarea>
         </div>
