@@ -1,3 +1,10 @@
+:root {
+  --pink-1: #fcd8d8; /* 252,216,216 */
+  --pink-2: #ffdddd; /* 255,221,221 */
+  --pink-3: #ffdcda; /* 255,220,218 */
+  --pink-4: #ffd1d1; /* 255,209,209 */
+  --pink-5: #f1c3c3; /* 241,195,195 */
+}
 /* ----------------------------------------
    1. RESET & BASE STYLES
 ---------------------------------------- */
@@ -14,7 +21,7 @@ html {
 
 body {
   font-family: 'Inter', sans-serif;
-  background-color: #ffdddd;
+  background-color: var(--pink-2);
   color: 	#bc7a7a;
   line-height: 1.6;
   min-height: 100vh;
@@ -26,7 +33,7 @@ body {
   max-width: 600px;
   margin: 2rem auto;
   padding: 2rem;
-  background: 	#ffdcda;
+  background: var(--pink-1);
   border-radius: 10px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
 }
@@ -63,9 +70,9 @@ textarea {
   width: 100%;
   padding: 0.75rem 1rem;
   font-size: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--pink-5);
   border-radius: 6px;
-  background: #fff;
+  background: var(--pink-3);
   color: #222;
   transition: border-color 0.2s;
 }
@@ -85,8 +92,8 @@ textarea:focus {
   font-size: 1rem;
   font-weight: 500;
   color: #222;
-  background: #fff;
-  border: 1px solid #ccc;
+  background: var(--pink-4);
+  border: 1px solid var(--pink-5);
   border-radius: 6px;
   text-decoration: none;
   text-align: center;
@@ -96,8 +103,8 @@ textarea:focus {
 }
 
 .button:hover {
-  background: #f0f0f0;
-  border-color: #bbb;
+  background: var(--pink-1);
+  border-color: var(--pink-3);
 }
 
 .button:active {
@@ -111,7 +118,7 @@ h1, h2, h3, .head-text {
   font-size: 1.5rem;
   font-weight: 500;
   margin-bottom: 1rem;
-  color: #222;
+  color: 	#8d5959;
   text-align: center;
 }
 
