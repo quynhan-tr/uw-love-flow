@@ -69,12 +69,6 @@ body {
   margin-bottom: 1.5rem;
 }
 
-.form-group label {
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  color: #604E4E;
-}
-
 input[type="text"],
 input[type="password"],
 textarea {
@@ -142,7 +136,7 @@ textarea:focus {
    5. TYPOGRAPHY
 ---------------------------------------- */
 h1, h2, h3, .head-text {
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 500;
   margin-bottom: 1rem;
   color: 	#604E4E;
