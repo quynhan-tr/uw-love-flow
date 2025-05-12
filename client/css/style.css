@@ -21,7 +21,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'PT Serif', sans-serif;
   background-color: var(--pink-1);
   color: 	#604E4E;
   line-height: 1.6;
@@ -44,9 +44,10 @@ body {
    2. LOGO
 ---------------------------------------- */
 .logo-text {
+  font-family: 'Montserrat', sans-serif;
   display: block;
   margin: 0 auto 1.5rem;   
-  font-size: 2rem;         
+  font-size: 5rem;         
   font-weight: 700;
   text-align: center;
   color: var(--pink-6);     
