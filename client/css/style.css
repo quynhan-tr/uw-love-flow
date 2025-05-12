@@ -44,7 +44,7 @@ body {
    2. LOGO
 ---------------------------------------- */
 .logo-text {
-  font-family: 'PT Serif', sans-serif;
+  font-family: 'Lato', sans-serif;
   display: block;
   margin: 0 auto 1.5rem;   
   font-size: 5rem;         
@@ -57,7 +57,7 @@ body {
 }
 
 .logo-text:hover {
-  color: var(--pink-5);   
+  color: #af7d7d;   
 }
 
 /* ----------------------------------------
