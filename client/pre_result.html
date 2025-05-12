@@ -9,11 +9,12 @@
 </head>
 <body>
   <div class="container">
-    <img src="/assets/Logo.png" alt="Logo" class="logo" onclick="window.location.href='/index.html'">
+    <a href="/index.html" class="logo-text">
+      UW Love Flow
+    </a>
 
     <h2 class="text-center mb-1">Enter Your Discord Handle</h2>
 
-    <!-- If you’re using templating (e.g. Jinja), you can still show errors here -->
     {% if error %}
       <p class="body-text text-center" style="color: #d11d1d;">{{ error }}</p>
     {% endif %}
