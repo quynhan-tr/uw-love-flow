@@ -93,13 +93,14 @@ textarea:focus {
    4. BUTTONS
 ---------------------------------------- */
 .button {
-  display: inline-block;
+  display: block;
   padding: 1rem 2rem;
+  margin: 0.75rem auto; 
   font-size: 1rem;
   font-weight: 500;
   color: #333;
-  background: var(--pink-4);
-  border: 1px solid var(--pink-5);
+  background: var(--pink-1);
+  border: 1px solid var(--pink-4);
   border-radius: 6px;
   text-decoration: none;
   text-align: center;
@@ -110,12 +111,19 @@ textarea:focus {
 
 .button:hover {
   background: var(--pink-1);
-  border-color: var(--pink-3);
+  border-color: var(--pink-4);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .button:active {
   box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;  /* stack vertically */
+  align-items: center;     /* center each button */
+  gap: 1rem;               /* 1rem between them */
 }
 
 /* ----------------------------------------
@@ -125,13 +133,13 @@ h1, h2, h3, .head-text {
   font-size: 1.5rem;
   font-weight: 500;
   margin-bottom: 1rem;
-  color: 	#333;
+  color: 	#c27b7b;
   text-align: center;
 }
 
 p, .body-text {
   font-size: 1rem;
-  color: #333;
+  color: #c27b7b;
   margin-bottom: 1rem;
   line-height: 1.4;
 }
