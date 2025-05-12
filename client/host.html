@@ -7,16 +7,33 @@
   <link rel="stylesheet" href="/css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
 </head>
-<body class="host">
-    <img src="/assets/Logo.png" alt="Logo" class="logo" onclick="window.location.href='/index.html'" style="margin-top: 150px;">
+<body>
+  <div class="container">
+    <!-- Logo is centered by .logo -->
+    <img src="/assets/Logo.png" alt="Logo" class="logo">
 
-    <div style="position: relative; height: 80vh;">
-      <div id="password-section" class="box">
-        <h2 style="color: #7E3064; font-family: 'Rubik', sans-serif; margin: 5px;">Enter Password</h2>
-        <input type="password" id="password" style="width: 80%; padding: 10px; margin: 10px 20px 20px 20px; border-radius: 5px; border: 2px solid #7E3064; font-family: 'Rubik', sans-serif; font-size: 18px;">
-        <button type ="button" class="button" onclick="checkPassword()">Continue as host</button>
+    <!-- Password form in a neat card -->
+    <div id="password-section" class="card">
+      <h2>Enter Password</h2>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          name="password"
+          required
+        >
       </div>
 
-    <script src="/js/host.js"></script>
+      <div class="text-center">
+        <button type="button" class="button" onclick="checkPassword()">
+          Continue as Host
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/host.js"></script>
 </body>
 </html>

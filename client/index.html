@@ -1,17 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Main</title>
+  <!-- Inter font + updated stylesheet -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
 </head>
-<body class="main">
-    <img src="/assets/Logo.png" alt="Logo" class="logo" style="margin-top: -150px;">
-    <div class="box">
-        <button class="button" onclick="window.location.href='/host.html'">Host</button>
-        <button class="button" onclick="window.location.href='/friendship-quiz.html'">Join a Flow</button>
-    </div>
+<body>
+  <div class="container text-center">
+    <img src="/assets/Logo.png" alt="Logo" class="logo">
+
+    <button
+      class="button mb-1"
+      onclick="window.location.href='/host.html'"
+    >
+      Host
+    </button>
+
+    <button
+      class="button"
+      onclick="window.location.href='/friendship-quiz.html'"
+    >
+      Join a Flow
+    </button>
+  </div>
 </body>
 </html>

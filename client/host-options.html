@@ -7,13 +7,23 @@
   <link rel="stylesheet" href="/css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
 </head>
-<body class="main">
-    <img src="/assets/Logo.png" alt="Logo" class="logo" onclick="window.location.href='/index.html'">
-      <div id="admin-buttons" class="box">
-            <button class="button" style="width: 300px; margin-bottom: 15px;" onclick="executeAction('/api/run-cook')">Cook</button>
-            <button class="button" style="width: 300px; margin-bottom: 15px;" onclick="executeAction('/api/delete-results')">Delete Results</button>
-            <button class="button" style="width: 300px;" onclick="executeAction('/api/delete-for-real')">Delete All</button>
-      </div>
+<body>
+    <div class="container text-center">
+      <img src="/assets/Logo.png" alt="Logo" class="logo" onclick="window.location.href='/index.html'">
+
+      <div id="admin-buttons">
+      <!-- mb-1 adds 1rem bottom margin; buttons auto-size up to 300px -->
+      <button class="button mb-1" onclick="executeAction('/api/run-cook')">
+        Cook
+      </button>
+      <button class="button mb-1" onclick="executeAction('/api/delete-results')">
+        Delete Results
+      </button>
+      <button class="button" onclick="executeAction('/api/delete-for-real')">
+        Delete All
+      </button>
+    </div>
+  </div>
     <script src="/js/host.js"></script>
 </body>
 </html>

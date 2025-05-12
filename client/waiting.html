@@ -1,49 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Waiting</title>
-  <link rel="stylesheet" href="/css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Finding Your Match</title>
+  <!-- Inter + your neutral style -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/css/style.css" />
 </head>
-<body class="main">
-    <img src="/assets/Logo.png" alt="Logo" class="logo" onclick="window.location.href='/index.html'" style="margin-top: -100px;">
-    <div class = "box">
-        <p class = "head-text">
-          We're finding your match<span class="loading-dots"></span></p>
-        <div class="withtext-box" style="gap: 20px; display: flex; justify-content: center; width: 100%;">
-          <button id="refresh-btn" class="button">Refresh</button>
-        </div>
-        <p class = "body-text">
-          Match will be released in approx 30 min~ While waiting, check out our activities:</p>
-        <p class = "body-text">
-          @CnD: Chocolate Fondue, Pin Making, Jenga</p>
-        <p class = "body-text">
-          @MC Comfy: Mocktails, Karaoke/ Talent show (for chance to win boba date!), CupPong, PhotoBooth</p>
+<body>
+  <div class="container">
+    <!-- centered logo -->
+    <img
+      src="/assets/Logo.png"
+      alt="Logo"
+      class="logo"
+      onclick="window.location.href='/index.html'"
+    />
+
+    <!-- header -->
+    <p class="head-text">
+      We’re finding your match<span class="loading-dots"></span>
+    </p>
+
+    <!-- refresh button -->
+    <div class="text-center mb-1">
+      <button id="refresh-btn" class="button">Refresh</button>
     </div>
-    <script>
-      document.getElementById('refresh-btn')
-        .addEventListener('click', () => {
-          fetch('/api/check_result')
-            .then(res => {
-              if (!res.ok) throw new Error(res.statusText);
-              return res.json();
-            })
-            .then(data => {
-              if (data.matches_exist) {
-                window.location.href = '/pre_result.html';
-              } else {
-                window.location.href = '/waiting.html';
-              }
-            })
-            .catch(err => {
-              console.error('Fetch error:', err);
-              alert('Something went wrong. Please try again later.');
-            });
-        });
-    </script>
+
+    <!-- info copy -->
+    <p class="body-text mb-1">
+      Matches will be released in approx 30 minutes. While you wait, check out our
+      activities:
+    </p>
+    <p class="body-text mb-0">
+      <strong>@CnD:</strong> Chocolate Fondue, Pin Making, Jenga
+    </p>
+    <p class="body-text">
+      <strong>@MC Comfy:</strong> Mocktails, Karaoke/Talent Show (win a boba date!), CupPong,
+      PhotoBooth
+    </p>
+  </div>
+
+  <script>
+    document
+      .getElementById("refresh-btn")
+      .addEventListener("click", () => {
+        fetch("/api/check_result")
+          .then((res) => {
+            if (!res.ok) throw new Error(res.statusText);
+            return res.json();
+          })
+          .then((data) => {
+            if (data.matches_exist) {
+              window.location.href = "/pre_result.html";
+            } else {
+              window.location.href = "/waiting.html";
+            }
+          })
+          .catch((err) => {
+            console.error("Fetch error:", err);
+            alert("Something went wrong. Please try again later.");
+          });
+      });
+  </script>
 </body>
 </html>
-
-
