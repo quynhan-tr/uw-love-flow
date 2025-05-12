@@ -50,14 +50,14 @@ body {
   font-size: 5rem;         
   font-weight: 900;
   text-align: center;
-  color: var(--pink-6);     
+  color: #af7d7d;     
   text-decoration: none;
   cursor: pointer;
   transition: color 0.2s;
 }
 
 .logo-text:hover {
-  color: #af7d7d;   
+  color: #cd9a9a;   
 }
 
 /* ----------------------------------------
