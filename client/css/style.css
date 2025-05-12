@@ -21,8 +21,8 @@ html {
 
 body {
   font-family: 'Inter', sans-serif;
-  background-color: var(--pink-2);
-  color: 	#bc7a7a;
+  background-color: var(--pink-1);
+  color: 	#333;
   line-height: 1.6;
   min-height: 100vh;
 }
@@ -33,9 +33,10 @@ body {
   max-width: 600px;
   margin: 2rem auto;
   padding: 2rem;
-  background: var(--pink-1);
+  background: var(--pink-2);
   border-radius: 10px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+  align-items: center;
 }
 
 /* ----------------------------------------
@@ -73,31 +74,36 @@ textarea {
   border: 1px solid var(--pink-5);
   border-radius: 6px;
   background: var(--pink-3);
-  color: #222;
+  color: #333;
   transition: border-color 0.2s;
 }
 
 input:focus,
 textarea:focus {
   outline: none;
-  border-color: #999;
+  border-color: #333;
 }
 
+/* ensure each radio/checkbox label stacks */
+.form-group > div > label {
+  display: block;
+  margin-bottom: 0.75rem;  /* space between options */
+}
 /* ----------------------------------------
    4. BUTTONS
 ---------------------------------------- */
 .button {
   display: inline-block;
-  padding: 0.75rem 1.5rem;
+  padding: 1rem 2rem;
   font-size: 1rem;
   font-weight: 500;
-  color: #222;
+  color: #333;
   background: var(--pink-4);
   border: 1px solid var(--pink-5);
   border-radius: 6px;
   text-decoration: none;
   text-align: center;
-  transition: background 0.2s, border-color 0.2s;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;  ;
   width: 100%;
   max-width: 300px;
 }
@@ -105,6 +111,7 @@ textarea:focus {
 .button:hover {
   background: var(--pink-1);
   border-color: var(--pink-3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .button:active {
@@ -118,13 +125,13 @@ h1, h2, h3, .head-text {
   font-size: 1.5rem;
   font-weight: 500;
   margin-bottom: 1rem;
-  color: 	#8d5959;
+  color: 	#333;
   text-align: center;
 }
 
 p, .body-text {
   font-size: 1rem;
-  color: #555;
+  color: #333;
   margin-bottom: 1rem;
   line-height: 1.4;
 }
