@@ -44,7 +44,7 @@ body {
    2. LOGO
 ---------------------------------------- */
 .logo-text {
-  font-family: 'Tagesschrift', sans-serif;
+  font-family: 'PT Serif', sans-serif;
   display: block;
   margin: 0 auto 1.5rem;   
   font-size: 5rem;         
@@ -100,6 +100,7 @@ textarea:focus {
    4. BUTTONS
 ---------------------------------------- */
 .button {
+  font-family: 'PT Serif', sans-serif;
   display: block;
   padding: 1rem 2rem;
   margin: 0.75rem auto; 
