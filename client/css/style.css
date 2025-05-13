@@ -57,8 +57,8 @@ body {
 }
 
 .logo-text:hover {
-  color: #f1c3c3; 
-  text-shadow: 0.5em 0.5em 0.05em rgba(50, 49, 49, 0.4);  
+  color: #e9abab; 
+  text-shadow: 0.15em 0.15em 0.2em rgba(50, 49, 49, 0.4);  
 }
 
 /* ----------------------------------------
