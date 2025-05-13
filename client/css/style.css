@@ -50,18 +50,10 @@ body {
   font-size: clamp(2.5rem, 8vw, 5rem);       
   font-weight: 900;
   text-align: center;
-  color: #f1c3c3;     
+  color: #e9abab;     
   text-decoration: none;
   cursor: pointer;
   transition: color 0.2s;
-  /* Primary stroke (WebKit browsers) */
-  -webkit-text-stroke: 0.05em var(--pink-5);
-  /* Fallback for other browsers */
-  text-shadow:
-    -0.03em -0.03em 0 var(--pink-5),
-    0.03em -0.03em 0 var(--pink-5),
-    -0.03em 0.03em 0 var(--pink-5),
-    0.03em 0.03em 0 var(--pink-5);
 }
 
 .logo-text:hover {
