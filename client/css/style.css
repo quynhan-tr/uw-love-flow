@@ -34,7 +34,7 @@ body {
   max-width: 800px;
   margin: 2rem auto;
   padding: 2rem;
-  background: var(--pink-2);
+  background: white;
   border-radius: 10px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
   align-items: center;
