@@ -2,21 +2,17 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
 
-  "builds": [
-    { "src": "client/**/*", "use": "@vercel/static" }
-  ],
+  "outputDirectory": "client",
 
   "routes": [
     {
       "src": "/api/(.*)",
       "dest": "https://uw-love-flow.onrender.com/$1"
     },
-    
     {
       "src": "^/([^\\.]+)\\.w$",
       "dest": "/api/templates/$1.html"
     },
-
     {
       "src": "/(.*)",
       "dest": "client/$1"
