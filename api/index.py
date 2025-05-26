@@ -90,7 +90,7 @@ def pre_result():
 @app.route('/check_result')
 def check_result():
     matches_exist = MatchResult.query.first() is not None
-    return jsonify(matches_exist=True)
+    return jsonify(matches_exist=matches_exist)
 
 @app.route('/host')
 def host():
