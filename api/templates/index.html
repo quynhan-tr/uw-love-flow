@@ -15,19 +15,9 @@
     </a>
 
     <div class="button-group">
-    <button
-      class="button mb-1"
-      onclick="window.location.href='{{ url_for(\'host\') }}'"
-    >
-      Host
-    </button>
+    <a href="{{ url_for('host') }}" class="button mb-1">Host</a>
 
-    <button
-      class="button"
-      onclick="window.location.href='{{ url_for(\'friendship_quiz\') }}'"
-    >
-      Join a Flow
-    </button>
+    <a href="{{ url_for('friendship_quiz') }}" class="button">Join a Flow</a>
     </div>
   </div>
 </body>
