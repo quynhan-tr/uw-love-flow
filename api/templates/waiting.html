@@ -40,7 +40,7 @@
     document
       .getElementById("refresh-btn")
       .addEventListener("click", () => {
-        fetch("/api/check_result")
+        fetch("/check_result")
           .then((res) => {
             if (!res.ok) throw new Error(res.statusText);
             return res.json();

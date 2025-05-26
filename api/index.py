@@ -85,14 +85,12 @@ def waiting():
 
 @app.route('/pre_result')
 def pre_result():
-    # Check if matches exist in the database
-    matches_exist = MatchResult.query.first() is not None
-    return render_template('pre_result.html', matches_exist=matches_exist)
+    return render_template('pre_result.html')
 
-@app.route('/api/check_result')
+@app.route('/check_result')
 def check_result():
     matches_exist = MatchResult.query.first() is not None
-    return jsonify(matches_exist=matches_exist)
+    return jsonify(matches_exist=True)
 
 @app.route('/host')
 def host():
