@@ -14,7 +14,7 @@
     
     {
       "src": "^/([^\\.]+)\\.w$",
-      "dest": "/client/$1.html"
+      "dest": "/api/templates/$1.html"
     },
 
     {
