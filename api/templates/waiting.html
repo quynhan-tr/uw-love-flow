@@ -11,7 +11,7 @@
 </head>
 <body>
   <div class="container">
-    <a href="/index.html" class="logo-text">
+    <a href="{{ url_for('home') }}" class="logo-text">
       UW Love Flow
     </a>
 
@@ -47,9 +47,9 @@
           })
           .then((data) => {
             if (data.matches_exist) {
-              window.location.href = "/pre_result.html";
+              window.location.href = "{{ url_for('pre_result') }}";
             } else {
-              window.location.href = "/waiting.html";
+              window.location.href = "{{ url_for('waiting') }}";
             }
           })
           .catch((err) => {

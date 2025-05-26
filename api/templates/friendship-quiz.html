@@ -10,10 +10,10 @@
 </head>
 <body>
   <div class="container">
-    <a href="/index.html" class="logo-text">
+    <a href="{{ url_for('home') }}"  class="logo-text">
       UW Love Flow
     </a>
-    <form id="friendship-quiz-form" method="POST" action="/friendship-quiz.html">
+    <form id="friendship-quiz-form" method="POST" action="{{ url_for('friendship_quiz') }}">
         <!-- Name and Discord Handle -->
         <div class="form-group">
           <p>Your Name</p>
@@ -120,6 +120,6 @@
       </form>
       
   </div>
-  <script src="/js/friendship-quiz.js"></script>
+  <script src="{{ url_for('static', filename='js/friendship-quiz.js') }}"></script>
 </body>
 </html>

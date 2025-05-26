@@ -10,7 +10,7 @@
 </head>
 <body>
   <div class="container">
-    <a href="/index.html" class="logo-text">
+    <a href="{{ url_for('home') }}" class="logo-text">
       UW Love Flow
     </a>
 
@@ -33,6 +33,6 @@
     </div>
   </div>
 
-  <script src="/js/host.js"></script>
+  <script src="{{ url_for('static', filename='js/host.js') }}"></script>
 </body>
 </html>

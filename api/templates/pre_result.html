@@ -10,7 +10,7 @@
 </head>
 <body>
   <div class="container">
-    <a href="/index.html" class="logo-text">
+    <a href="{{ url_for('home') }}" class="logo-text">
       UW Love Flow
     </a>
 
@@ -20,7 +20,7 @@
       <p class="body-text text-center" style="color: #d11d1d;">{{ error }}</p>
     {% endif %}
 
-    <form action="/pre_result.html" method="GET">
+    <form action="{{ url_for('pre_result') }}" method="GET">
       <div class="form-group">
         <label for="discord">Discord Handle</label>
         <input
