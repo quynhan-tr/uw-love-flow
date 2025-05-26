@@ -33,11 +33,11 @@ def create_tables():
 
 @app.route('/')
 def home():
-    return render_template('main.html')
+    return render_template('index.html')
 
-@app.route('/main')
+@app.route('/index')
 def main():
-    return render_template('main.html')
+    return render_template('index.html')
 
 
 @app.route('/friendship-quiz', methods=['GET', 'POST'])
