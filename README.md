@@ -8,7 +8,7 @@
 
 ## About
 
-**uw love flow** is a web application designed to facilitate a unique speed dating experience using personality and preference matching. https://uwloveflow-8ffa567f9896.herokuapp.com/
+**uw love flow** is a web application designed to facilitate a unique speed dating experience using personality and preference matching.
 
 ## Features
 
